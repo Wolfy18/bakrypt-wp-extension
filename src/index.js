@@ -295,9 +295,7 @@ jQuery(document).ready(function ($) {
 		const collectionFinal = fetchIPFSImagesReq.data.data.map((i) => {
 			const elem = { ...i };
 
-			if (
-				uploadedImages.map((j) => j.post_id).includes(i.post_id)
-			) {
+			if (uploadedImages.map((j) => j.post_id).includes(i.post_id)) {
 				elem.image = uploadedImages.filter(
 					(j) => j.post_id === i.post_id
 				)[0].image;
