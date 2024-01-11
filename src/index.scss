@@ -1,17 +1,6 @@
 // Add styles here.
-// .components-notice.is-dismissible {
-// 	position: fixed;
-// 	top: '10%';
-// 	right: 0;
-// }
-// #product_images_container {
-// 	.product_images {
-// 		img {
-// 			width: 100%;
-// 		}
-// 	}
-// }
-#blockchain_product_data,
+
+#blockchain_post_data,
 #posts-filter {
 	position: relative;
 	#spinner {
@@ -30,4 +19,12 @@
 	.custom-toast-position {
 		margin-top: 20px;
 	}
+}
+
+.wp-list-table .manage-column.column-asset_fingerprint {
+	width: 12%;
+}
+
+#woocommerce-product-data ul.wc-tabs li.bakrypt-blockchain_tab a::before {
+	content: '\f17e';
 }

@@ -15,17 +15,26 @@ namespace BakExtension\core;
 defined('ABSPATH') || exit;
 
 use BakExtension\api\RestAdapter;
-use BakExtension\controllers\ProductList;
+use BakExtension\controllers\Post;
 
 class Cron
 {
 
     public static function bak_run_cron_task()
     {
+        // Check if the lock is set
+        if (get_transient('bak_wp_plugin_cron_lock')) {
+            // Task is already running, exit
+            return;
+        }
+
+        // Set the lock for a specific time (e.g., 5 minutes)
+        set_transient('bak_wp_plugin_cron_lock', true, 5 * 60);
+
         # Get all non-completed products and sync them
         $args = array(
             'post_type' => 'product',
-            'posts_per_page' => -1,
+            'posts_per_page' => 10,
             'post_status' => array('publish', 'private'),
             'meta_query' => array(
                 'relation' => "AND",
@@ -39,18 +48,8 @@ class Cron
                         'relation' => 'OR',
                         array(
                             'key' => 'bk_token_status',
-                            'value' => 'confirmed',
-                            'compare' => '!=',
-                        ),
-                        array(
-                            'key' => 'bk_token_status',
-                            'value' => 'canceled',
-                            'compare' => '!=',
-                        ),
-                        array(
-                            'key' => 'bk_token_status',
-                            'value' => 'error',
-                            'compare' => '!=',
+                            'value' => array('canceled', 'error', 'rejected'),
+                            'compare' => 'NOT IN',
                         ),
                     ),
                     array(
@@ -81,6 +80,7 @@ class Cron
             $token_uuid = get_post_meta($product_id, 'bk_token_uuid', true);
 
             if ($token_uuid) {
+
                 $_data = $adapter->fetch_token_data($token_uuid);
 
                 if (!empty($_data)) {
@@ -97,9 +97,12 @@ class Cron
                         "bk_token_status" => $_data->status
                     );
 
-                    ProductList::update_record($product_id, $data);
+                    Post::update_record($product_id, $data);
                 }
             }
         }
+
+        // Remove the lock when the task is completed
+        delete_transient('bak_wp_plugin_cron_lock');
     }
 }

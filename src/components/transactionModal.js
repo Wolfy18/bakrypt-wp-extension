@@ -3,8 +3,10 @@ import { useState, useEffect, useRef } from '@wordpress/element';
 
 const noticeStyles = { position: 'fixed', top: '5%', right: '5%' };
 
-const TransactionModal = ({ getter, collection }) => {
-	const [isOpen, setOpen] = useState(false);
+const TransactionModal = ({ config, getter, collection }) => {
+	const { accessToken, testnet, open = false, showButton = true } = config;
+
+	const [isOpen, setOpen] = useState(open);
 	const [showNotice, setShowNotice] = useState(false);
 	const [notice, setNotice] = useState('');
 	const [noticeStatus, setNoticeStatus] = useState('');
@@ -27,7 +29,9 @@ const TransactionModal = ({ getter, collection }) => {
 			const transaction = await getter();
 
 			const invoice = document.createElement('bakrypt-invoice');
-			Object.assign(invoice, { transaction, collection });
+			Object.assign(invoice, { transaction, collection, accessToken });
+
+			if (testnet) Object.assign(invoice, { testnet: true });
 
 			const showToastr = (event) => {
 				const [message, type] = event.detail;
@@ -45,9 +49,12 @@ const TransactionModal = ({ getter, collection }) => {
 	}, [isOpen, showNotice, collection, getter]);
 	return (
 		<>
-			<Button variant="secondary" onClick={openModal}>
-				View Request
-			</Button>
+			{showButton && (
+				<Button variant="secondary" onClick={openModal}>
+					View Request
+				</Button>
+			)}
+
 			{isOpen && (
 				<Modal
 					title="Review Transaction"
@@ -73,9 +80,13 @@ const TransactionModal = ({ getter, collection }) => {
 	);
 };
 
-function renderTransactionModal(transactionGetter, collection) {
+function renderTransactionModal(config, getter, collection) {
 	return (
-		<TransactionModal getter={transactionGetter} collection={collection} />
+		<TransactionModal
+			config={config}
+			getter={getter}
+			collection={collection}
+		/>
 	);
 }
 

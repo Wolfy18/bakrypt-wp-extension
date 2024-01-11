@@ -1,20 +1,18 @@
 <?php
 
 /**
- * Plugin Name: Bakrypt Blockchain Extension
+ * Plugin Name: Bakrypt Article Blockchain Extension
  * Plugin URI: https://bakrypt.io
- * Description: Mint your products into the Cardano Blockchain
+ * Description: Mint your blog posts into the Cardano Blockchain
  * Version: 1.1.0
  * Author: Wolfgang Leon
  * Author URI: https://bakrypt.io/
  * Developer: Wolfgang Leon
  * Developer URI: https://bakrypt.io/pool/
- * Text Domain: bakrypt-wc-extension
+ * Text Domain: bakrypt-wp-extension
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  * 
- * WC requires at least: 7.1
- * WC tested up to: 7.7.2
  *
  */
 
@@ -27,7 +25,7 @@ define('WCBAK_PLUGIN_FILE', __FILE__);
 require_once "vendor/autoload.php";
 
 // Initiate wc bakrypt class
-use BakExtension\core\BakWCExtension;
+use BakExtension\core\BakWPExtension;
 
 
 # Add custom interval for every 3 minutes
@@ -43,12 +41,12 @@ function bak_add_every_three_minutes($schedules)
 
 
 
-function wcbakrypt_init()
+function wpbakrypt_init()
 {
-	BakWCExtension::init();
+	BakWPExtension::init();
 }
 
-add_action('plugins_loaded', 'wcbakrypt_init', 11);
+add_action('plugins_loaded', 'wpbakrypt_init', 11);
 
 // ========= Cron Tasks ======= 
 function cron_activate()

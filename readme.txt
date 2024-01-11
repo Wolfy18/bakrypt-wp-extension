@@ -3,17 +3,42 @@ Contributors: bakrypt
 Donate link: https://bakrypt.io/pool/
 Tags: NFT, Cardano, Blockchain, WooCommerce, Tokenization, Supply Chain
 Requires at least: 6.0
-Tested up to: 6.2.2
-Stable tag: 1.1.0
+Tested up to: 6.4.2
+Stable tag: 1.3.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-A plugin made to extend Woocommerce features.
+The WooCommerce Blockchain Tokenization Extension, is an innovative plugin that is revolutionizing the world of e-commerce.
 
 == Description ==
 
-**Non-Fungible Tokens as a supply chain solution.**
+With this plugin, you can easily mint your existing or new products into collections of NFTs or Fungible tokens with just a few clicks. The system will automatically pick up metadata from your products and generate a valid JSON structure. Bakrypt's API will mint the object as a Cardano native token according to your preferences.
+
+The plugin also has the ability to upload images and documents into IPFS using Bakrypt's IPFS node. Product thumbnail images will automatically be picked as the cover image for NFTs, and these will be uploaded at the time of minting. Once the transaction has been submitted, Bakrypt will generate a transaction with an estimated cost and a deposit address. Once payment is confirmed on the deposit address, Bakrypt will go ahead and mint the tokens in the Cardano blockchain. Following the minting process, any remaining tokens (ADA) and assets will be sent back to the sender's address. Refunds are offered for _non-confirmed_ transactions. It's important to note that Bakrypt's convenience fees are _non-refundable_ for transactions that have been confirmed.
+
+The plugin implements WordPress native cron tasks; the plugin will automatically pull asset data (every 3 minutes until the transaction is confirmed or canceled), into your WordPress store and update your store products. The metadata includes the transaction's submitted JSON metadata as seen in the blockchain, policyId, fingerprint, and status. This metadata is used in several places in WordPress, such as printing the fingerprint of a minted asset in the order's email that the customer receives, which improves the traceability of the product and increases trust in the store.
+
+Learn more 🚀 -> [Plugin's Docs](https://bakrypt.readme.io/reference/blockchain-tokenization-extension-for-woocommerce)
+
+== Demo ==
+
+We've created a demo store with custom permissions so that you can try the plugin without having to install a new instance. Managers are allowed to view and edit products. The demo store is available at https://wp.bakrypt.io, and you can log in with the following credentials:
+
+Login:
+[https://wp.bakrypt.io/wp-admin](https://wp.bakrypt.io/wp-admin)
+
+Username: manager
+Password: manager
+
+Try it today and see the difference it can make for your business! Feel free to create your own tokens!
+
+== Github == 
+
+This is an open-source development. 
+[https://github.com/Wolfy18/bakrypt-wp-extension](https://github.com/Wolfy18/bakrypt-wp-extension)
+
+== Non-Fungible Tokens as a supply chain solution ==
 
 Non-fungible tokens (NFTs) are digital assets that represent ownership of a unique item or concept. They are stored on a blockchain and can be bought, sold, and traded like any other asset.
 
@@ -23,30 +48,20 @@ NFTs could also be used to verify the authenticity of products, by linking them 
 
 Overall, the use of NFTs in a supply chain could help companies improve transparency, traceability, and authenticity, which could in turn enhance customer trust and loyalty.
 
-== Bakrypt API ==
+== Register with Bakrypt.io ==
+We use Bakrypt's API to conveniently interact with the blockchain. Therefore, it's required to create an account in our platform.
 
-Are you looking to create and sell non-fungible tokens (NFTs)? Our minting service can help you bring your unique digital assets to the market quickly and easily.
+* Create an account for mainnet:
+[Mainnet Bakrypt API](https://bakrypt.io/account/login/) 
+[Remember to set your password](https://bakrypt.io/account/password_reset/) 
 
-With our platform, you'll have access to a range of tools and features that make it simple to create and manage your NFTs. You can easily upload your artwork or other content, set your own prices, and choose from a variety of options for how your NFTs will be sold and distributed.
-
-Our platform is built on top of a robust and secure blockchain, ensuring that your NFTs are safe and secure. We also offer support from our team of experts, who can help you every step of the way as you create and sell your NFTs.
-
-Don't miss out on the growing market for NFTs – join our platform today and start minting your own digital assets.
+* Create an account for testnet.
+[Testnet Bakrypt API](https://testnet.bakrypt.io/account/login/) 
+[Remember to set your password](https://testnet.bakrypt.io/account/password_reset/) 
 
 == Cardano Blockchain ==
 
-Cardano is a decentralized public blockchain and cryptocurrency project that is focused on providing a secure and scalable platform for the creation and use of non-fungible tokens (NFTs). Some potential benefits of using Cardano for NFTs include:
-
-1. Security: Cardano uses a proof-of-stake (PoS) consensus algorithm and a multi-layered architecture that is designed to be secure and resistant to attacks. This can be particularly important for NFTs, which may represent valuable or unique assets that need to be protected.
-
-2. Scalability: Cardano is built to be scalable, with the ability to handle a large number of transactions per second. This can be useful for NFTs, which may be in high demand and require a fast and efficient platform to support their creation and exchange.
-
-3. Interoperability: Cardano is designed to be interoperable with other blockchain platforms, which could allow NFTs created on Cardano to be easily integrated with other applications and systems.
-
-4. Decentralized: Cardano is a decentralized platform, which means that it is not controlled by any single entity and is instead maintained by a distributed network of participants. This can provide users with greater control over their assets and reduce the risk of censorship or interference.
-
-5. Community support: Cardano has a large and active community of developers and users who are involved in the project and contribute to its development. This can provide users with access to a wealth of resources and support when it comes to using Cardano for NFTs.
-
+Cardano is a decentralized public blockchain and cryptocurrency project that is focused on providing a secure and scalable platform for the creation and use of non-fungible tokens (NFTs).
 
 **Bakrypt Docs**
 [Getting started with our API](https://bakrypt.readme.io/reference/getting-started-with-your-api)
@@ -60,17 +75,6 @@ Cardano is a decentralized public blockchain and cryptocurrency project that is 
 2. Search for our plugin with the search bar in the top right corner.
 3. After finding the plugin in the results, click Install Now. You can also click the plugin name to view more details about it.
 4. To use the plugin, you'll need to activate it. When the installation is finished (this usually takes a couple of seconds), click Activate.
-
-= Register with Bakrypt =
-We use Bakrypt's API to conveniently interact with the blockchain platform, while still being able to take advantage of the underlying technology. Therefore, it's require to create an account in our platform. We only required a valid email.
-
-* Create an account for mainnet:
-[Mainnet Bakrypt API](https://bakrypt.io/account/login/) 
-[Remember to set your password](https://bakrypt.io/account/password_reset/) 
-
-* Create an account for testnet.
-[Testnet Bakrypt API](https://testnet.bakrypt.io/account/login/) 
-[Remember to set your password](https://testnet.bakrypt.io/account/password_reset/) 
 
 **WooCommerce Blockchain Settings**
 1. In your WooCommerce Settings, find the "Blockchain" tab to setup your credentials. 
@@ -108,8 +112,61 @@ WooCommerce is a scalable platform that can handle a large volume of traffic and
 8. Email view that includes a tokenized product. 
 9. Tokenized Product View Blockchain Section
 10. New Product View Blockchain Section
+11. Mint products in bulks from the product list view
+12. Bakrypt launchpad view with multiple assets/products
 
 == Changelog ==
+
+= 1.3.2 =
+* feat: added token authentication schema
+* feat: updated woocommerce blockchain settings to use Token authentication
+
+= 1.2.2 =
+* feat: updated README documentation.
+
+= 1.2.1 =
+* chore: shaked tree to removed unused code 
+* feat: update js file to properly render components with react 18
+* feat: added wp global settings that includes the nonce and the root URL API
+* fix: removed jQuery related code to fetch data
+* feat: added IPFS related endpoints
+* feat: added endpoint to fetch access tokens from Bakrypt API
+* feat: added functions to get, update and mint products in bulks
+* feat: added functions to get and update the product details via REST
+* feat: added rest routes, authentication and authorization functionality
+
+= 1.1.6 =
+* Fixed bug related to shipping line item
+
+= 1.1.5 =
+* Added function that includes fingerprint for variable products
+* Added hook to include fingeprint to order metadata
+
+= 1.1.4 =
+* Commented out logic that uploads image on every update
+* Updated issue when updating product in cron task
+
+= 1.1.3 =
+* Added transaction status to the token column if the token hasn't been minted yet
+* Fixed logic when prepping data when minting a list of tokens.
+* Added logic to save the IPFS value to the attachment once it's uploaded.
+* Added function to delete transient when plugin is deactivated.
+* Modified query to fix issue with maximum execution time of the cron job.
+* Modified the transactionModal to accept config variables as parameters
+* Fixed issue authorization issue when submitting a refund.
+
+
+= 1.1.2 =
+* Checks if cron are scheduled before starting a new one.
+* Adds cron lock file logic.
+
+= 1.1.1 =
+* Fixes product list filter
+* Fixes Product List fingerprint column size
+* Fixes cron query. Rejected transaction were picked up by the cron task.
+
+= 1.0 =
+* Version 1.
 
 = 0.1 =
 * Beta version.
