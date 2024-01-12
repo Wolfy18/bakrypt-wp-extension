@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Plugin Name: Bakrypt Article Blockchain Extension
+ * Plugin Name: ImmuPress: Transforming Content Creation on WordPress
  * Plugin URI: https://bakrypt.io
  * Description: Mint your blog posts into the Cardano Blockchain
- * Version: 1.1.0
+ * Version: 0.1.0
  * Author: Wolfgang Leon
  * Author URI: https://bakrypt.io/
  * Developer: Wolfgang Leon
