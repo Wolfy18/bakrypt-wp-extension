@@ -1,6 +1,6 @@
-# Woocommerce Blockchain Tokenization Extension
+# WordPress Blog Post Tokenization Plugin
 
-The WooCommerce Blockchain Tokenization Extension, is an innovative plugin that is revolutionizing the world of e-commerce.
+The WordPress Blog Post Tokenization Plugin, is an innovative plugin that is revolutionizing the world of speech.
 
 With this plugin, you can easily mint your existing or new products into collections of NFTs or Fungible tokens with just a few clicks. The system will automatically pick up metadata from your products and generate a valid JSON structure. Bakrypt's API will mint the object as a Cardano native token according to your preferences.
 
@@ -56,11 +56,9 @@ We use Bakrypt's API to conveniently interact with the blockchain. Therefore, it
 
 -   Create an account for mainnet:
     [Mainnet Bakrypt API](https://bakrypt.io/account/login/)
-    [Remember to set your password](https://bakrypt.io/account/password_reset/)
 
 -   Create an account for testnet.
     [Testnet Bakrypt API](https://testnet.bakrypt.io/account/login/)
-    [Remember to set your password](https://testnet.bakrypt.io/account/password_reset/)
 
 ## Cardano Blockchain
 
