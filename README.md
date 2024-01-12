@@ -40,15 +40,32 @@ npm start
 composer install
 ```
 
-**Non-Fungible Tokens as a supply chain solution.**
+**ImmuPress offers a comprehensive solution for various use cases:**
 
-Non-fungible tokens (NFTs) are digital assets that represent ownership of a unique item or concept. They are stored on a blockchain and can be bought, sold, and traded like any other asset.
 
-One potential use case for NFTs within a supply chain is to track the ownership and movement of goods as they pass through various stages of production, distribution, and sale. For example, an NFT could be created for each batch of raw materials that enter a manufacturing facility, and then updated with information about where those materials were used and what products they were used to create. This could help companies track the origin and history of their products, and make it easier to trace them back to their source in the event of a recall or other issue.
+* Freedom of Speech and Decentralized Publishing:
+ImmuPress empowers users with true freedom of speech, allowing them to publish content on WordPress without the fear of censorship. By leveraging decentralized storage through NFTs, the plugin ensures that articles remain publicly accessible and resistant to takedowns.
 
-NFTs could also be used to verify the authenticity of products, by linking them to a unique digital asset that represents the product's provenance. This could be particularly useful for high-value items such as luxury goods or art, where counterfeiting is a concern.
+* Authenticity and Proof of Ownership:
+Authors can prove the authenticity of their content through ImmuPress. The plugin utilizes the metadata from selected articles to generate a robust JSON data structure, creating an NFT that serves as an immutable record of ownership. This not only protects against plagiarism but also establishes a clear and traceable chain of ownership.
 
-Overall, the use of NFTs in a supply chain could help companies improve transparency, traceability, and authenticity, which could in turn enhance customer trust and loyalty.
+* Anti-Censorship and Resistance to Takedowns:
+ImmuPress enhances resistance to censorship attempts by utilizing NFTs for decentralized storage. This makes it challenging for any single entity to take down or manipulate content, ensuring the longevity and availability of articles.
+
+* Use Case in Journalism and Reporting:
+Journalists benefit from ImmuPress as it provides a secure and authenticated platform for storing investigative articles. This is particularly crucial in regions where press freedom is a concern, offering a reliable solution for journalists to safeguard their work.
+
+* Historical Documentation and Preservation:
+ImmuPress serves as a valuable tool for archivists and historians, enabling the preservation of historical records through NFTs. The decentralized and immutable nature of the blockchain ensures the long-term availability of information.
+
+* Copyright Protection:
+Content creators using ImmuPress gain copyright protection through the generation of NFTs. These digital certificates of authenticity safeguard against unauthorized use, providing a secure environment for authors to protect their intellectual property.
+
+* Integration with Existing Processes:
+ImmuPress seamlessly integrates into existing WordPress workflows. Authors can easily select one or multiple articles, and the plugin utilizes the metadata to generate the JSON data structure required for NFT creation. The process is user-friendly, allowing for a smooth and efficient experience.
+
+* Community Collaboration:
+ImmuPress encourages community collaboration by allowing users to collectively contribute to the decentralized storage and preservation of valuable content. Authors, historians, and journalists can collaborate to build a robust and diverse archive of information.
 
 ## Register with Bakrypt.io
 
