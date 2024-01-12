@@ -1,25 +1,27 @@
-=== Bakrypt Blockchain Tokenization Extension for WooCommerce  ===
+=== ImmuPress: Transforming Content Creation on WordPress  ===
 Contributors: bakrypt
 Donate link: https://bakrypt.io/pool/
-Tags: NFT, Cardano, Blockchain, WooCommerce, Tokenization, Supply Chain
+Tags: NFT, Cardano, Blockchain, Tokenization, Immutable 
 Requires at least: 6.0
 Tested up to: 6.4.2
-Stable tag: 1.3.2
+Stable tag: 0.1.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-The WooCommerce Blockchain Tokenization Extension, is an innovative plugin that is revolutionizing the world of e-commerce.
+ImmuPress: Empowering Secure, Censorship-Resistant Content Creation on WordPress
 
 == Description ==
 
-With this plugin, you can easily mint your existing or new products into collections of NFTs or Fungible tokens with just a few clicks. The system will automatically pick up metadata from your products and generate a valid JSON structure. Bakrypt's API will mint the object as a Cardano native token according to your preferences.
+ImmuPress emerges as a innovative WordPress plugin, harnessing the potential of blockchain and NFTs to reshape the dynamics of content creation. Crafted for individuals across various fields, ImmuPress addresses the core challenges prevalent in the digital era.
 
-The plugin also has the ability to upload images and documents into IPFS using Bakrypt's IPFS node. Product thumbnail images will automatically be picked as the cover image for NFTs, and these will be uploaded at the time of minting. Once the transaction has been submitted, Bakrypt will generate a transaction with an estimated cost and a deposit address. Once payment is confirmed on the deposit address, Bakrypt will go ahead and mint the tokens in the Cardano blockchain. Following the minting process, any remaining tokens (ADA) and assets will be sent back to the sender's address. Refunds are offered for _non-confirmed_ transactions. It's important to note that Bakrypt's convenience fees are _non-refundable_ for transactions that have been confirmed.
+In an environment where freedom of expression is paramount, ImmuPress becomes a haven for creators on WordPress. By utilizing NFTs and decentralized storage, the plugin ensures that published content remains resilient against censorship, providing a platform where ideas can flourish without apprehension of takedowns. ImmuPress empowers users with the genuine freedom to express themselves, fostering a digital space where voices can be heard and ideas preserved for eternity.
 
-The plugin implements WordPress native cron tasks; the plugin will automatically pull asset data (every 3 minutes until the transaction is confirmed or canceled), into your WordPress store and update your store products. The metadata includes the transaction's submitted JSON metadata as seen in the blockchain, policyId, fingerprint, and status. This metadata is used in several places in WordPress, such as printing the fingerprint of a minted asset in the order's email that the customer receives, which improves the traceability of the product and increases trust in the store.
+ImmuPress goes beyond conventional publication; it's a stronghold for authenticity and ownership. Authors can confidently affirm the legitimacy of their content through the generation of NFTs. By grabbing key details from articles, ImmuPress creates an unalterable record of ownership, safeguarding against plagiarism and establishing a transparent chain of authorship. This not only protects creators but also enhances the credibility of the content.
 
-Learn more 🚀 -> [Plugin's Docs](https://bakrypt.readme.io/reference/blockchain-tokenization-extension-for-woocommerce)
+This user-friendly plugin seamlessly integrates into existing WordPress workflows, allowing authors to effortlessly select and transform articles into NFTs. ImmuPress doesn't just secure content; it fosters collaboration. Users, whether in journalism, academia, or creative fields, become contributors to a decentralized archive, ensuring the preservation of valuable information for generations to come. ImmuPress is more than a tool; it's a commitment to a decentralized, secure, and censorship-resistant future for content creation on WordPress.
+
+Learn more 🚀 -> [Plugin's Docs](https://bakrypt.readme.io/reference/immupress)
 
 == Demo ==
 
@@ -53,11 +55,9 @@ We use Bakrypt's API to conveniently interact with the blockchain. Therefore, it
 
 * Create an account for mainnet:
 [Mainnet Bakrypt API](https://bakrypt.io/account/login/) 
-[Remember to set your password](https://bakrypt.io/account/password_reset/) 
 
 * Create an account for testnet.
 [Testnet Bakrypt API](https://testnet.bakrypt.io/account/login/) 
-[Remember to set your password](https://testnet.bakrypt.io/account/password_reset/) 
 
 == Cardano Blockchain ==
 
@@ -69,20 +69,13 @@ Cardano is a decentralized public blockchain and cryptocurrency project that is 
 
 == Installation ==
 
-**Make sure WooCommerce is also installed and activated** 
-
-1. In your WordPress dashboard, choose Plugins > Add new.
-2. Search for our plugin with the search bar in the top right corner.
-3. After finding the plugin in the results, click Install Now. You can also click the plugin name to view more details about it.
-4. To use the plugin, you'll need to activate it. When the installation is finished (this usually takes a couple of seconds), click Activate.
-
-**WooCommerce Blockchain Settings**
-1. In your WooCommerce Settings, find the "Blockchain" tab to setup your credentials. 
-2. Set your Client ID, Client Secret, Username and Password for the Bakrypt's account. 
+**WordPress Blockchain Settings**
+1. In your WordPress Settings, find the "Blockchain" tab to setup your credentials. 
+2. Set your Token from your the Bakrypt's account. 
 3. Save Changes!
 
 *Testnet Credentials (Optional):* 
-4. Set your Client ID, Client Secret, Username and Password for the Bakrypt's *testnet* account.
+4. Set your Token from your Bakrypt's *testnet* account.
 5. Activate the "testnet" checkbox. This will send all requests towards the testnet network.
 6. Save Changes! 
 
@@ -92,13 +85,13 @@ Cardano is a decentralized public blockchain and cryptocurrency project that is 
 
 Using a WordPress plugin to mint NFTs can make the process of creating and managing NFTs more accessible to users who may not have technical expertise in blockchain or coding.
 
-= Can I integrate it to my existing shop? =
+= Can I integrate it to my existing blog? =
 
 This plugin allows users to mint and manage NFTs within their existing WordPress website, rather than having to set up a separate platform or interface. This can be more convenient for users who already have a presence on WordPress.
 
 = Is this solution scalable? =
 
-WooCommerce is a scalable platform that can handle a large volume of traffic and transactions, making it suitable for stores of all sizes.
+WordPress is a scalable platform that can handle a large volume of traffic and transactions, making it suitable for stores of all sizes.
 
 == Screenshots ==
 
@@ -116,57 +109,6 @@ WooCommerce is a scalable platform that can handle a large volume of traffic and
 12. Bakrypt launchpad view with multiple assets/products
 
 == Changelog ==
-
-= 1.3.2 =
-* feat: added token authentication schema
-* feat: updated woocommerce blockchain settings to use Token authentication
-
-= 1.2.2 =
-* feat: updated README documentation.
-
-= 1.2.1 =
-* chore: shaked tree to removed unused code 
-* feat: update js file to properly render components with react 18
-* feat: added wp global settings that includes the nonce and the root URL API
-* fix: removed jQuery related code to fetch data
-* feat: added IPFS related endpoints
-* feat: added endpoint to fetch access tokens from Bakrypt API
-* feat: added functions to get, update and mint products in bulks
-* feat: added functions to get and update the product details via REST
-* feat: added rest routes, authentication and authorization functionality
-
-= 1.1.6 =
-* Fixed bug related to shipping line item
-
-= 1.1.5 =
-* Added function that includes fingerprint for variable products
-* Added hook to include fingeprint to order metadata
-
-= 1.1.4 =
-* Commented out logic that uploads image on every update
-* Updated issue when updating product in cron task
-
-= 1.1.3 =
-* Added transaction status to the token column if the token hasn't been minted yet
-* Fixed logic when prepping data when minting a list of tokens.
-* Added logic to save the IPFS value to the attachment once it's uploaded.
-* Added function to delete transient when plugin is deactivated.
-* Modified query to fix issue with maximum execution time of the cron job.
-* Modified the transactionModal to accept config variables as parameters
-* Fixed issue authorization issue when submitting a refund.
-
-
-= 1.1.2 =
-* Checks if cron are scheduled before starting a new one.
-* Adds cron lock file logic.
-
-= 1.1.1 =
-* Fixes product list filter
-* Fixes Product List fingerprint column size
-* Fixes cron query. Rejected transaction were picked up by the cron task.
-
-= 1.0 =
-* Version 1.
 
 = 0.1 =
 * Beta version.
