@@ -62,6 +62,34 @@ class Settings
 		}
 	}
 
+	public static function add_bak_options_page()
+	{
+		add_options_page(
+			'Bakrypt Authentication',
+			'Blockchain',
+			'manage_options',
+			'bakrypt-settings',
+			array('BakWP\core\Settings', 'render_bakrypt_settings_page')
+		);
+	}
+	// Render the options page content
+	public static function render_bakrypt_settings_page()
+	{
+?>
+		<div class="wrap">
+			<h2>Blockchain Settings</h2>
+			<form method="post" action="options.php">
+				<?php
+				settings_fields('bakrypt_settings_group');
+				do_settings_sections('bakrypt-settings');
+				submit_button('Save Settings');
+				?>
+			</form>
+		</div>
+<?php
+	}
+
+
 	public static function register_bak_settings()
 	{
 		// Register a setting for token
@@ -76,24 +104,24 @@ class Settings
 		// Add a section for Bakrypt Settings
 		add_settings_section(
 			'bakrypt_settings_section',
-			'Bakrypt Settings',
-			'bakrypt_settings_section_callback',
+			'Bakrypt API configuration',
+			array('BakWP\core\Settings', 'bakrypt_settings_section_callback'),
 			'bakrypt-settings'
 		);
 
 		// Add fields for token and testnet token
 		add_settings_field(
 			'bakrypt_token',
-			'Token',
-			self::bakrypt_token_callback(),
+			'Token*',
+			array('BakWP\core\Settings', 'bakrypt_token_callback'),
 			'bakrypt-settings',
 			'bakrypt_settings_section'
 		);
 
 		add_settings_field(
 			'bakrypt_testnet_token',
-			'Testnet Token',
-			self::bakrypt_testnet_token_callback(),
+			'Testnet Token (Optional)',
+			array('BakWP\core\Settings', 'bakrypt_testnet_token_callback'),
 			'bakrypt-settings',
 			'bakrypt_settings_section'
 		);
@@ -102,33 +130,37 @@ class Settings
 		add_settings_field(
 			'bakrypt_testnet_active',
 			'Testnet is Active',
-			self::bakrypt_testnet_active_callback(),
+			array('BakWP\core\Settings', 'bakrypt_testnet_active_callback'),
 			'bakrypt-settings',
 			'bakrypt_settings_section'
 		);
 	}
 
 	// Callback functions for rendering fields
-	private static function bakrypt_token_callback()
+	public static function bakrypt_token_callback()
 	{
 		$token = get_option('bakrypt_token');
-		echo '<input type="text" name="bakrypt_token" value="' . esc_attr($token) . '" />';
+		echo '<input type="password" name="bakrypt_token" value="' . esc_attr($token) . '" />';
 	}
 
-	private static function bakrypt_testnet_token_callback()
+	public static function bakrypt_testnet_token_callback()
 	{
 		$testnetToken = get_option('bakrypt_testnet_token');
-		echo '<input type="text" name="bakrypt_testnet_token" value="' . esc_attr($testnetToken) . '" />';
+		echo "<hr/>";
+		echo '<input type="password" name="bakrypt_testnet_token" value="' . esc_attr($testnetToken) . '" />';
 	}
 
-	private static function bakrypt_testnet_active_callback()
+	public static function bakrypt_testnet_active_callback()
 	{
 		$testnetActive = get_option('bakrypt_testnet_active');
 		echo '<input type="checkbox" name="bakrypt_testnet_active" ' . checked(1, $testnetActive, false) . ' />';
 	}
 
-	private static function bakrypt_settings_section_callback()
+	public static function bakrypt_settings_section_callback()
 	{
-		echo '<p>Configure your Bakrypt authentication settings below:</p>';
+		echo '<p>Visit our website to view your account token.</p>';
+		echo '<h4><a href="https://bakrypt.io/account" target="_blank">https://bakrypt.io/account</a><h4>';
+		echo '<div class="media"><img src="https://gateway.bakrypt.io/ipfs/QmeAJcMyNU9HpLCH9NnNrEnNhPhWm87XgxhRH6xuEQqRnK/" /><br/><small>* Screenshot of a section from the user dashboard at https://bakrypt.io/account</small></div>';
+		echo '<h3>Paste your authentication token below:</h3>';
 	}
 }

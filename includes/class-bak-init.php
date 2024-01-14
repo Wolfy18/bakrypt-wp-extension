@@ -33,6 +33,7 @@ class BakWP
     {
         //==================================== Settings ===================================
         add_action('admin_enqueue_scripts', array('BakWP\core\Settings', 'add_extension_register_script'));
+        add_action('admin_menu', array('BakWP\core\Settings', 'add_bak_options_page'));
         add_action('admin_init', array('BakWP\core\Settings', 'register_bak_settings'));
 
         //==================================== REST api ===================================
@@ -45,7 +46,7 @@ class BakWP
         // add_action('manage_product_posts_custom_column', array("BakWP\controllers\PostList", 'bak_fingerprint_column_data'), 10, 2);
         // add_filter('woocommerce_product_filters', array("BakWP\controllers\PostList", 'bak_custom_filter'));
         // add_action('pre_get_posts', array("BakWP\controllers\PostList", 'bak_post_filter_query'));
-        
+
         // //==================================== Post  ===================================
         // add_filter('woocommerce_product_tabs', array("BakWP\controllers\Post", 'bakrypt_blockchain_post_tab'));
         // add_filter('woocommerce_product_data_tabs', array("BakWP\controllers\Post", 'bakrypt_blockchain_post_data_tab'));
