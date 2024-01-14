@@ -39,7 +39,7 @@ ImmuPress encourages community collaboration by allowing users to collectively c
 
 ## Demo
 
-We've created a demo store with custom permissions so that you can try the plugin without having to install a new instance. Managers are allowed to view and edit products. The demo store is available at https://wp.bakrypt.io, and you can log in with the following credentials:
+We've created a demo store with custom permissions so that you can try the plugin without having to install a new instance. Managers are allowed to view and edit posts. The demo store is available at https://wp.bakrypt.io, and you can log in with the following credentials:
 
 Login:
 https://wp.bakrypt.io/wp-admin
@@ -58,7 +58,7 @@ Node v16.20.0 is recommended.
 To get started, run the following commands:
 
 ```text
-nvm install 16 (Optional)
+nvm install 16
 nvm use 16
 
 npm install
@@ -74,7 +74,7 @@ We use Bakrypt's API to conveniently interact with the blockchain. Therefore, it
 -   Create an account for mainnet:
     [Mainnet Bakrypt API](https://bakrypt.io/account/login/)
 
--   Create an account for testnet.
+-   Create an account for testnet (PREPROD).
     [Testnet Bakrypt API](https://testnet.bakrypt.io/account/login/)
 
 ## Cardano Blockchain
@@ -89,11 +89,15 @@ Cardano is a decentralized public blockchain and cryptocurrency project that is 
 
 **WordPress Blockchain Settings**
 
-1. In your WooCommerce Settings, find the "Blockchain" tab to setup your credentials.
-2. Set your Client ID, Client Secret, Username and Password for the Bakrypt's account.
+1. In your WordPress Settings, find the "Blockchain" item to setup your credentials.
+2. Set your Token from your Bakrypt account.
 3. Save Changes!
 
-_Testnet Credentials (Optional):_ 4. Set your Client ID, Client Secret, Username and Password for the Bakrypt's _testnet_ account. 5. Activate the "testnet" checkbox. This will send all requests towards the testnet network. 6. Save Changes!
+_Testnet Credentials (Optional):_ 
+4. Set your Token from your Bakrypt _testnet_ account. 
+5. Activate the "testnet" checkbox. This will send all requests towards the testnet network (PREPROD). 
+
+6. Save Changes!
 
 ## Frequently Asked Questions
 
@@ -109,12 +113,9 @@ This plugin allows users to mint and manage NFTs within their existing WordPress
 ## Screenshots
 
 1. Blockchain Settings Section.
-2. Product List filtered by tokenized products.
-3. Product Tokenization Minting process.
-4. Product Tokenization Invoice.
-5. Product Tokenization Invoice Status.
-6. Cart with tokenized product. It includes the asset fingerprint.
-7. Order view that includes tokenized products. It includes asset fingerprints for each product.
-8. Email view that includes a tokenized product.
-9. Tokenized Product View Blockchain Section
-10. New Product View Blockchain Section
+2. Post List filtered by tokenized articles.
+3. Post Tokenization Minting process.
+4. Post Tokenization Invoice.
+5. Post Tokenization Invoice Status.
+6. Tokenized Post View Blockchain Section
+7. New Post View Blockchain Section
