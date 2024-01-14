@@ -510,7 +510,7 @@ class Post
 
     public static function add_ipfs_meta_box()
     {
-        add_meta_box("ipfs-meta-box", "Blockchain token image", array("BakExtension\controllers\Post", "ipfs_meta_box_markup"), "product", "side", "low", null);
+        add_meta_box("ipfs-meta-box", "Blockchain token image", array("BakExtension\controllers\Post", "ipfs_meta_box_markup"), "post", "side", "low", null);
     }
 
     public static function post_token_get_image()

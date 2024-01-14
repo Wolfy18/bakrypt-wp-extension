@@ -37,6 +37,20 @@ class BakWPExtension
         add_action('woocommerce_settings_tabs_bak_settings', array('BakExtension\core\Settings', 'bak_add_bak_settings'));
         add_action('woocommerce_update_options_bak_settings', array('BakExtension\core\Settings', 'bak_update_options_bak_settings'));
 
+        // function custom_settings_section_callback() {
+        //     echo '<p>This is a custom settings section description.</p>';
+        // }
+        
+        // function register_custom_settings_section() {
+        //     add_settings_section(
+        //         'custom_section_id',
+        //         'Custom Section Title',
+        //         'custom_settings_section_callback',
+        //         'general'  // The page where the section should appear (e.g., general settings)
+        //     );
+        // }
+        // add_action( 'admin_init', 'register_custom_settings_section' );
+
         //==================================== REST api ===================================
         add_action('rest_api_init', array('BakExtension\api\RestRoutes', 'auth_routes'));
         add_action('rest_api_init', array('BakExtension\api\RestRoutes', 'product_routes'));
