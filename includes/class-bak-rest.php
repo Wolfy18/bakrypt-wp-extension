@@ -5,17 +5,17 @@
  *
  * A class that represents bakrypt's API and REST use cases.
  *
- * @package BakExtension\api
+ * @package BakWP\api
  * @version 1.0.0
  * @since   1.0.0
  */
 
-namespace BakExtension\api;
+namespace BakWP\api;
 
 defined('ABSPATH') || exit();
 
-use BakExtension\controllers\Post;
-use BakExtension\controllers\PostList;
+use BakWP\controllers\Post;
+use BakWP\controllers\PostList;
 
 class RestAdapter
 {
@@ -25,37 +25,19 @@ class RestAdapter
     function __construct()
     {
         if (!$this->settings) {
-            $testnet = get_option('wc_settings_tab_bak_testnet_active');
+            $testnet = get_option('bakrypt_testnet_active');
             if ($testnet != 'yes') {
                 $url = 'https://bakrypt.io';
-                $client_id = get_option('wc_settings_tab_bak_client_id');
-                $client_secret = get_option(
-                    'wc_settings_tab_bak_client_secret'
-                );
-                $username = get_option('wc_settings_tab_bak_username');
-                $password = get_option('wc_settings_tab_bak_password');
-                $auth_token = get_option('wc_settings_tab_bak_auth_token');
+                $auth_token = get_option('bakrypt_token');
             } else {
                 $url = 'https://testnet.bakrypt.io';
-                $client_id = get_option(
-                    'wc_settings_tab_bak_testnet_client_id'
-                );
-                $client_secret = get_option(
-                    'wc_settings_tab_bak_testnet_client_secret'
-                );
-                $username = get_option('wc_settings_tab_bak_testnet_username');
-                $password = get_option('wc_settings_tab_bak_testnet_password');
                 $auth_token = get_option(
-                    'wc_settings_tab_bak_testnet_auth_token'
+                    'bakrypt_testnet_token'
                 );
             }
 
             $this->settings = [
                 'url' => $url,
-                'client_id' => $client_id,
-                'client_secret' => $client_secret,
-                'username' => $username,
-                'password' => $password,
                 'testnet' => $testnet,
                 'auth_token' => $auth_token,
             ];

@@ -9,11 +9,11 @@
  * @since   1.0.0
  */
 
-namespace BakExtension\core;
+namespace BakWP\core;
 
 defined('ABSPATH') || exit;
 
-class BakWPExtension
+class BakWP
 {
     /**
      * The single instance of the class.
@@ -31,44 +31,28 @@ class BakWPExtension
 
     public static function init()
     {
-        //==================================== WooCommerce Settings ===================================
-        add_action('admin_enqueue_scripts', array('BakExtension\core\Settings', 'add_extension_register_script'));
-        add_filter('woocommerce_settings_tabs_array', array('BakExtension\core\Settings', 'add_bak_settings'), 50);
-        add_action('woocommerce_settings_tabs_bak_settings', array('BakExtension\core\Settings', 'bak_add_bak_settings'));
-        add_action('woocommerce_update_options_bak_settings', array('BakExtension\core\Settings', 'bak_update_options_bak_settings'));
-
-        // function custom_settings_section_callback() {
-        //     echo '<p>This is a custom settings section description.</p>';
-        // }
-        
-        // function register_custom_settings_section() {
-        //     add_settings_section(
-        //         'custom_section_id',
-        //         'Custom Section Title',
-        //         'custom_settings_section_callback',
-        //         'general'  // The page where the section should appear (e.g., general settings)
-        //     );
-        // }
-        // add_action( 'admin_init', 'register_custom_settings_section' );
+        //==================================== Settings ===================================
+        add_action('admin_enqueue_scripts', array('BakWP\core\Settings', 'add_extension_register_script'));
+        add_action('admin_init', array('BakWP\core\Settings', 'register_bak_settings'));
 
         //==================================== REST api ===================================
-        add_action('rest_api_init', array('BakExtension\api\RestRoutes', 'auth_routes'));
-        add_action('rest_api_init', array('BakExtension\api\RestRoutes', 'product_routes'));
+        add_action('rest_api_init', array('BakWP\api\RestRoutes', 'auth_routes'));
+        add_action('rest_api_init', array('BakWP\api\RestRoutes', 'product_routes'));
 
-        //==================================== Post List ===================================
-        add_filter('manage_product_posts_columns', array("BakExtension\controllers\PostList", 'bak_fingerprint_column'));
-        add_filter('bulk_actions-edit-product', array("BakExtension\controllers\PostList", 'add_mint_bulk_action'));
-        add_action('manage_product_posts_custom_column', array("BakExtension\controllers\PostList", 'bak_fingerprint_column_data'), 10, 2);
-        add_filter('woocommerce_product_filters', array("BakExtension\controllers\PostList", 'bak_custom_filter'));
-        add_action('pre_get_posts', array("BakExtension\controllers\PostList", 'bak_post_filter_query'));
+        // //==================================== Post List ===================================
+        // add_filter('manage_product_posts_columns', array("BakWP\controllers\PostList", 'bak_fingerprint_column'));
+        // add_filter('bulk_actions-edit-product', array("BakWP\controllers\PostList", 'add_mint_bulk_action'));
+        // add_action('manage_product_posts_custom_column', array("BakWP\controllers\PostList", 'bak_fingerprint_column_data'), 10, 2);
+        // add_filter('woocommerce_product_filters', array("BakWP\controllers\PostList", 'bak_custom_filter'));
+        // add_action('pre_get_posts', array("BakWP\controllers\PostList", 'bak_post_filter_query'));
         
-        //==================================== Post  ===================================
-        add_filter('woocommerce_product_tabs', array("BakExtension\controllers\Post", 'bakrypt_blockchain_post_tab'));
-        add_filter('woocommerce_product_data_tabs', array("BakExtension\controllers\Post", 'bakrypt_blockchain_post_data_tab'));
-        add_action('woocommerce_product_data_panels', array("BakExtension\controllers\Post", 'bakrypt_blockchain_post_data_fields'));
-        add_action("add_meta_boxes", array("BakExtension\controllers\Post", "add_ipfs_meta_box"));
-        add_action('woocommerce_process_product_meta', array("BakExtension\controllers\Post", 'bak_save_blockchain_meta'));
-        add_action('wp_ajax_product_token_get_image', array("BakExtension\controllers\Post", 'post_token_get_image'));
+        // //==================================== Post  ===================================
+        // add_filter('woocommerce_product_tabs', array("BakWP\controllers\Post", 'bakrypt_blockchain_post_tab'));
+        // add_filter('woocommerce_product_data_tabs', array("BakWP\controllers\Post", 'bakrypt_blockchain_post_data_tab'));
+        // add_action('woocommerce_product_data_panels', array("BakWP\controllers\Post", 'bakrypt_blockchain_post_data_fields'));
+        // add_action("add_meta_boxes", array("BakWP\controllers\Post", "add_ipfs_meta_box"));
+        // add_action('woocommerce_process_product_meta', array("BakWP\controllers\Post", 'bak_save_blockchain_meta'));
+        // add_action('wp_ajax_product_token_get_image', array("BakWP\controllers\Post", 'post_token_get_image'));
 
     }
 

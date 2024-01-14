@@ -5,17 +5,17 @@
  *
  * A class which represents cron jobs
  *
- * @package BakExtension\core
+ * @package BakWP\core
  * @version 1.0.0
  * @since   1.0.0
  */
 
-namespace BakExtension\core;
+namespace BakWP\core;
 
 defined('ABSPATH') || exit;
 
-use BakExtension\api\RestAdapter;
-use BakExtension\controllers\Post;
+use BakWP\api\RestAdapter;
+use BakWP\controllers\Post;
 
 class Cron
 {
