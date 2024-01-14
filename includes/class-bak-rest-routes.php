@@ -5,12 +5,12 @@
  *
  * A class which represents plugin's REST routes
  *
- * @package BakExtension\api
+ * @package BakWP\api
  * @version 1.0.0
  * @since   1.0.0
  */
 
-namespace BakExtension\api;
+namespace BakWP\api;
 
 defined('ABSPATH') || exit;
 
@@ -38,8 +38,8 @@ class RestRoutes
             '/posts',
             array(
                 'methods' => 'PUT',
-                'callback' => array('BakExtension\api\RestAdapter', 'update_posts_bulk'),
-                'permission_callback' => array("BakExtension\api\RestRoutes", 'check_permission')
+                'callback' => array('BakWP\api\RestAdapter', 'update_posts_bulk'),
+                'permission_callback' => array("BakWP\api\RestRoutes", 'check_permission')
             )
         );
 
@@ -53,8 +53,8 @@ class RestRoutes
             '/posts/ipfs',
             array(
                 'methods' => 'POST',
-                'callback' => array('BakExtension\api\RestAdapter', 'get_ipfs_images'),
-                'permission_callback' => array("BakExtension\api\RestRoutes", 'check_permission')
+                'callback' => array('BakWP\api\RestAdapter', 'get_ipfs_images'),
+                'permission_callback' => array("BakWP\api\RestRoutes", 'check_permission')
             )
         );
 
@@ -64,8 +64,8 @@ class RestRoutes
             '/posts/ipfs',
             array(
                 'methods' => 'PUT',
-                'callback' => array('BakExtension\api\RestAdapter', 'upload_ipfs_images'),
-                'permission_callback' => array("BakExtension\api\RestRoutes", 'check_permission')
+                'callback' => array('BakWP\api\RestAdapter', 'upload_ipfs_images'),
+                'permission_callback' => array("BakWP\api\RestRoutes", 'check_permission')
             )
         );
 
@@ -75,8 +75,8 @@ class RestRoutes
             '/posts/(?P<id>\d+)',
             array(
                 'methods' => 'GET',
-                'callback' => array('BakExtension\api\RestAdapter', 'get_post_detail'),
-                'permission_callback' => array("BakExtension\api\RestRoutes", 'check_permission')
+                'callback' => array('BakWP\api\RestAdapter', 'get_post_detail'),
+                'permission_callback' => array("BakWP\api\RestRoutes", 'check_permission')
             )
         );
 
@@ -86,8 +86,8 @@ class RestRoutes
             '/posts/(?P<id>\d+)',
             array(
                 'methods' => 'PUT',
-                'callback' => array('BakExtension\api\RestAdapter', 'update_post_detail'),
-                'permission_callback' => array("BakExtension\api\RestRoutes", 'check_permission')
+                'callback' => array('BakWP\api\RestAdapter', 'update_post_detail'),
+                'permission_callback' => array("BakWP\api\RestRoutes", 'check_permission')
             )
         );
 
@@ -98,8 +98,8 @@ class RestRoutes
             '/posts/(?P<id>\d+)',
             array(
                 'methods' => 'DELETE',
-                'callback' => array('BakExtension\api\RestAdapter', 'delete_post_token'),
-                'permission_callback' => array("BakExtension\api\RestRoutes", 'check_permission')
+                'callback' => array('BakWP\api\RestAdapter', 'delete_post_token'),
+                'permission_callback' => array("BakWP\api\RestRoutes", 'check_permission')
             )
         );
     }
@@ -113,8 +113,8 @@ class RestRoutes
             '/auth/token',
             array(
                 'methods' => 'POST',
-                'callback' => array('BakExtension\api\RestAdapter', 'fetch_access_token'),
-                'permission_callback' => array("BakExtension\api\RestRoutes", 'check_permission')
+                'callback' => array('BakWP\api\RestAdapter', 'fetch_access_token'),
+                'permission_callback' => array("BakWP\api\RestRoutes", 'check_permission')
             )
         );
     }

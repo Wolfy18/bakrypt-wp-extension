@@ -10,6 +10,33 @@ This user-friendly plugin seamlessly integrates into existing WordPress workflow
 
 Learn more 🚀 -> https://bakrypt.readme.io/reference/immupress
 
+## ImmuPress offers a comprehensive solution for various use cases:
+
+
+* Freedom of Speech and Decentralized Publishing:
+ImmuPress empowers users with true freedom of speech, allowing them to publish content on WordPress without the fear of censorship. By leveraging decentralized storage through NFTs, the plugin ensures that articles remain publicly accessible and resistant to takedowns.
+
+* Authenticity and Proof of Ownership:
+Authors can prove the authenticity of their content through ImmuPress. The plugin utilizes the metadata from selected articles to generate a robust JSON data structure, creating an NFT that serves as an immutable record of ownership. This not only protects against plagiarism but also establishes a clear and traceable chain of ownership.
+
+* Anti-Censorship and Resistance to Takedowns:
+ImmuPress enhances resistance to censorship attempts by utilizing NFTs for decentralized storage. This makes it challenging for any single entity to take down or manipulate content, ensuring the longevity and availability of articles.
+
+* Use Case in Journalism and Reporting:
+Journalists benefit from ImmuPress as it provides a secure and authenticated platform for storing investigative articles. This is particularly crucial in regions where press freedom is a concern, offering a reliable solution for journalists to safeguard their work.
+
+* Historical Documentation and Preservation:
+ImmuPress serves as a valuable tool for archivists and historians, enabling the preservation of historical records through NFTs. The decentralized and immutable nature of the blockchain ensures the long-term availability of information.
+
+* Copyright Protection:
+Content creators using ImmuPress gain copyright protection through the generation of NFTs. These digital certificates of authenticity safeguard against unauthorized use, providing a secure environment for authors to protect their intellectual property.
+
+* Integration with Existing Processes:
+ImmuPress seamlessly integrates into existing WordPress workflows. Authors can easily select one or multiple articles, and the plugin utilizes the metadata to generate the JSON data structure required for NFT creation. The process is user-friendly, allowing for a smooth and efficient experience.
+
+* Community Collaboration:
+ImmuPress encourages community collaboration by allowing users to collectively contribute to the decentralized storage and preservation of valuable content. Authors, historians, and journalists can collaborate to build a robust and diverse archive of information.
+
 ## Demo
 
 We've created a demo store with custom permissions so that you can try the plugin without having to install a new instance. Managers are allowed to view and edit products. The demo store is available at https://wp.bakrypt.io, and you can log in with the following credentials:
@@ -39,33 +66,6 @@ npm start
 
 composer install
 ```
-
-**ImmuPress offers a comprehensive solution for various use cases:**
-
-
-* Freedom of Speech and Decentralized Publishing:
-ImmuPress empowers users with true freedom of speech, allowing them to publish content on WordPress without the fear of censorship. By leveraging decentralized storage through NFTs, the plugin ensures that articles remain publicly accessible and resistant to takedowns.
-
-* Authenticity and Proof of Ownership:
-Authors can prove the authenticity of their content through ImmuPress. The plugin utilizes the metadata from selected articles to generate a robust JSON data structure, creating an NFT that serves as an immutable record of ownership. This not only protects against plagiarism but also establishes a clear and traceable chain of ownership.
-
-* Anti-Censorship and Resistance to Takedowns:
-ImmuPress enhances resistance to censorship attempts by utilizing NFTs for decentralized storage. This makes it challenging for any single entity to take down or manipulate content, ensuring the longevity and availability of articles.
-
-* Use Case in Journalism and Reporting:
-Journalists benefit from ImmuPress as it provides a secure and authenticated platform for storing investigative articles. This is particularly crucial in regions where press freedom is a concern, offering a reliable solution for journalists to safeguard their work.
-
-* Historical Documentation and Preservation:
-ImmuPress serves as a valuable tool for archivists and historians, enabling the preservation of historical records through NFTs. The decentralized and immutable nature of the blockchain ensures the long-term availability of information.
-
-* Copyright Protection:
-Content creators using ImmuPress gain copyright protection through the generation of NFTs. These digital certificates of authenticity safeguard against unauthorized use, providing a secure environment for authors to protect their intellectual property.
-
-* Integration with Existing Processes:
-ImmuPress seamlessly integrates into existing WordPress workflows. Authors can easily select one or multiple articles, and the plugin utilizes the metadata to generate the JSON data structure required for NFT creation. The process is user-friendly, allowing for a smooth and efficient experience.
-
-* Community Collaboration:
-ImmuPress encourages community collaboration by allowing users to collectively contribute to the decentralized storage and preservation of valuable content. Authors, historians, and journalists can collaborate to build a robust and diverse archive of information.
 
 ## Register with Bakrypt.io
 

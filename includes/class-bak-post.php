@@ -5,16 +5,16 @@
  *
  * A class which represents Post details operations and renderization.
  *
- * @package BakExtension\controllers
+ * @package BakWP\controllers
  * @version 1.0.0
  * @since   1.0.0
  */
 
-namespace BakExtension\controllers;
+namespace BakWP\controllers;
 
 defined('ABSPATH') || exit;
 
-use BakExtension\api\RestAdapter;
+use BakWP\api\RestAdapter;
 
 class Post
 {
@@ -143,7 +143,7 @@ class Post
         $tabs['desc_tab'] = array(
             'title' => __('Blockchain', 'blockchain'),
             'priority' => 50,
-            'callback' => array("BakExtension\controllers\Post", 'bakrypt_blockchain_post_tab_content')
+            'callback' => array("BakWP\controllers\Post", 'bakrypt_blockchain_post_tab_content')
         );
     }
 
@@ -510,7 +510,7 @@ class Post
 
     public static function add_ipfs_meta_box()
     {
-        add_meta_box("ipfs-meta-box", "Blockchain token image", array("BakExtension\controllers\Post", "ipfs_meta_box_markup"), "product", "side", "low", null);
+        add_meta_box("ipfs-meta-box", "Blockchain token image", array("BakWP\controllers\Post", "ipfs_meta_box_markup"), "post", "side", "low", null);
     }
 
     public static function post_token_get_image()

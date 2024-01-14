@@ -4,16 +4,16 @@
  * Post List
  * A class which represents Post list operations and renderization.
  *
- * @package BakExtension\controllers
+ * @package BakWP\controllers
  * @version 1.0.0
  * @since   1.0.0
  */
 
-namespace BakExtension\controllers;
+namespace BakWP\controllers;
 
 defined('ABSPATH') || exit;
 
-use BakExtension\controllers\Post;
+use BakWP\controllers\Post;
 
 class PostList
 {

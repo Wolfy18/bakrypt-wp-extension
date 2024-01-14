@@ -5,12 +5,12 @@
  *
  * A class that represents blockchain settings.
  *
- * @package BakExtension\core
+ * @package BakWP\core
  * @version 1.0.0
  * @since   1.0.0
  */
 
-namespace BakExtension\core;
+namespace BakWP\core;
 
 defined('ABSPATH') || exit();
 
@@ -20,38 +20,15 @@ class Settings
 
 	public static $base = 'bak';
 
-	public static function missing_wc_notice()
-	{
-		/* translators: %s WC download URL link. */
-		echo '<div class="error"><p><strong>' .
-			sprintf(
-				esc_html__(
-					'WC Blockchain Extension requires WooCommerce to be installed and active. You can download %s here.',
-					'woocommerce-blockchain-extension'
-				),
-				'<a href="https://woocommerce.com/" target="_blank">WooCommerce</a>'
-			) .
-			'</strong></p></div>';
-	}
-
-	public static function add_bak_settings($settings_tabs)
-	{
-		$settings_tabs['bak_settings'] = __(
-			'Blockchain',
-			'bak-woocommerce-settings-tab'
-		);
-		return $settings_tabs;
-	}
-
 	public static function add_extension_register_script($page)
 	{
 		$script_path = '/build/index.js';
 		$script_asset_path =
-			dirname(WCBAK_PLUGIN_FILE) . '/build/index.asset.php';
+			dirname(WPBAK_PLUGIN_FILE) . '/build/index.asset.php';
 		$script_asset = file_exists($script_asset_path)
 			? require $script_asset_path
 			: ['dependencies' => [], 'version' => filemtime($script_path)];
-		$script_url = plugins_url($script_path, WCBAK_PLUGIN_FILE);
+		$script_url = plugins_url($script_path, WPBAK_PLUGIN_FILE);
 
 		wp_register_script(
 			'bakrypt-wp-extension',
@@ -70,10 +47,10 @@ class Settings
 
 		wp_register_style(
 			'bakrypt-wp-extension',
-			plugins_url('/build/index.css', WCBAK_PLUGIN_FILE),
+			plugins_url('/build/index.css', WPBAK_PLUGIN_FILE),
 			// Add any dependencies styles may have, such as wp-components.
 			[],
-			filemtime(dirname(WCBAK_PLUGIN_FILE) . '/build/index.css')
+			filemtime(dirname(WPBAK_PLUGIN_FILE) . '/build/index.css')
 		);
 
 		wp_enqueue_script('bakrypt-wp-extension');
@@ -85,63 +62,73 @@ class Settings
 		}
 	}
 
-	private static function fetch_bak_settings()
+	public static function register_bak_settings()
 	{
-		$settings = [
-			'section_title' => [
-				'name' => __(
-					'Bakrypt API Credentials',
-					'bak-woocommerce-settings-tab'
-				),
-				'type' => 'title',
-				'desc' => '',
-				'id' => 'wc_settings_tab_demo_section_title',
-			],
-			'auth_token' => [
-				'name' => __('Authentication Token', 'bak-woocommerce-settings-tab'),
-				'type' => 'password',
-				'desc' => __(
-					'The token for your Bakrypt account.',
-					'bak-woocommerce-settings-tab'
-				),
-				'id' => 'wc_settings_tab_bak_auth_token',
-			],
-			'testnet_auth_token' => [
-				'name' => __('Testnet Authentication Token', 'bak-woocommerce-settings-tab'),
-				'type' => 'password',
-				'desc' => __(
-					'The token for your TESTNET Bakrypt account.',
-					'bak-woocommerce-settings-tab'
-				),
-				'id' => 'wc_settings_tab_bak_testnet_auth_token',
-			],
-			'testnet_active' => [
-				'name' => __(
-					'Is Testnet active?',
-					'bak-woocommerce-settings-tab'
-				),
-				'type' => 'checkbox',
-				'desc' => __(
-					'Testnet routing is active.',
-					'bak-woocommerce-settings-tab'
-				),
-				'id' => 'wc_settings_tab_bak_testnet_active',
-			],
-			'section_end' => [
-				'type' => 'sectionend',
-				'id' => 'wc_settings_tab_bak_section_end',
-			],
-		];
-		return apply_filters('wc_settings_tab_bak_settings', $settings);
+		// Register a setting for token
+		register_setting('bakrypt_settings_group', 'bakrypt_token');
+
+		// Register a setting for testnet token
+		register_setting('bakrypt_settings_group', 'bakrypt_testnet_token');
+
+		// Register a setting for testnet activation
+		register_setting('bakrypt_settings_group', 'bakrypt_testnet_active');
+
+		// Add a section for Bakrypt Settings
+		add_settings_section(
+			'bakrypt_settings_section',
+			'Bakrypt Settings',
+			'bakrypt_settings_section_callback',
+			'bakrypt-settings'
+		);
+
+		// Add fields for token and testnet token
+		add_settings_field(
+			'bakrypt_token',
+			'Token',
+			self::bakrypt_token_callback(),
+			'bakrypt-settings',
+			'bakrypt_settings_section'
+		);
+
+		add_settings_field(
+			'bakrypt_testnet_token',
+			'Testnet Token',
+			self::bakrypt_testnet_token_callback(),
+			'bakrypt-settings',
+			'bakrypt_settings_section'
+		);
+
+		// Add field for testnet activation
+		add_settings_field(
+			'bakrypt_testnet_active',
+			'Testnet is Active',
+			self::bakrypt_testnet_active_callback(),
+			'bakrypt-settings',
+			'bakrypt_settings_section'
+		);
 	}
 
-	public static function bak_add_bak_settings()
+	// Callback functions for rendering fields
+	private static function bakrypt_token_callback()
 	{
-		woocommerce_admin_fields(self::fetch_bak_settings());
+		$token = get_option('bakrypt_token');
+		echo '<input type="text" name="bakrypt_token" value="' . esc_attr($token) . '" />';
 	}
 
-	public static function bak_update_options_bak_settings()
+	private static function bakrypt_testnet_token_callback()
 	{
-		woocommerce_update_options(self::fetch_bak_settings());
+		$testnetToken = get_option('bakrypt_testnet_token');
+		echo '<input type="text" name="bakrypt_testnet_token" value="' . esc_attr($testnetToken) . '" />';
+	}
+
+	private static function bakrypt_testnet_active_callback()
+	{
+		$testnetActive = get_option('bakrypt_testnet_active');
+		echo '<input type="checkbox" name="bakrypt_testnet_active" ' . checked(1, $testnetActive, false) . ' />';
+	}
+
+	private static function bakrypt_settings_section_callback()
+	{
+		echo '<p>Configure your Bakrypt authentication settings below:</p>';
 	}
 }
