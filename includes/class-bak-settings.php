@@ -66,7 +66,7 @@ class Settings
 	{
 		add_options_page(
 			'Bakrypt Authentication',
-			'Blockchain',
+			'Bakrypt',
 			'manage_options',
 			'bakrypt-settings',
 			array('BakWP\core\Settings', 'render_bakrypt_settings_page')

@@ -38,14 +38,14 @@ class BakWP
 
         //==================================== REST api ===================================
         add_action('rest_api_init', array('BakWP\api\RestRoutes', 'auth_routes'));
-        add_action('rest_api_init', array('BakWP\api\RestRoutes', 'product_routes'));
+        add_action('rest_api_init', array('BakWP\api\RestRoutes', 'post_routes'));
 
-        // //==================================== Post List ===================================
-        // add_filter('manage_product_posts_columns', array("BakWP\controllers\PostList", 'bak_fingerprint_column'));
-        // add_filter('bulk_actions-edit-product', array("BakWP\controllers\PostList", 'add_mint_bulk_action'));
-        // add_action('manage_product_posts_custom_column', array("BakWP\controllers\PostList", 'bak_fingerprint_column_data'), 10, 2);
-        // add_filter('woocommerce_product_filters', array("BakWP\controllers\PostList", 'bak_custom_filter'));
-        // add_action('pre_get_posts', array("BakWP\controllers\PostList", 'bak_post_filter_query'));
+        //==================================== Post List ===================================
+        add_filter('manage_posts_columns', array("BakWP\controllers\PostList", 'bak_fingerprint_column'));
+        add_action('manage_posts_custom_column', array("BakWP\controllers\PostList", 'bak_fingerprint_column_data'), 10, 2);
+        add_filter('restrict_manage_posts', array("BakWP\controllers\PostList", 'bak_custom_filter'));
+        add_filter('bulk_actions-edit-post', array("BakWP\controllers\PostList", 'add_mint_bulk_action'));
+        add_filter('parse_query', array("BakWP\controllers\PostList", 'bak_post_filter_query'));
 
         // //==================================== Post  ===================================
         // add_filter('woocommerce_product_tabs', array("BakWP\controllers\Post", 'bakrypt_blockchain_post_tab'));
@@ -69,23 +69,5 @@ class BakWP
         }
 
         return self::$_instance;
-    }
-
-    /**
-     * Cloning is forbidden.
-     */
-    public function __clone()
-    {
-        // Override this PHP function to prevent unwanted copies of your instance.
-        // Implement your own error or use `wc_doing_it_wrong()`
-    }
-
-    /**
-     * Unserializing instances of this class is forbidden.
-     */
-    public function __wakeup()
-    {
-        // Override this PHP function to prevent unwanted copies of your instance.
-        // Implement your own error or use `wc_doing_it_wrong()`
     }
 }
