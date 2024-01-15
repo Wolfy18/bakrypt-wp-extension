@@ -75,16 +75,20 @@ class PostList
 		return $output;
 	}
 
-	public static function bak_custom_filter($output)
+	public static function bak_custom_filter()
 	{
-		global $wp_query;
-		$output .= '<select class="token-filter dropdown_product_cat" name="tokenize">' . self::bak_get_filter_options() . '</select>';
+		global $typenow;
 
-		return $output;
+		// Ensure the filter is displayed only on the desired post types
+		if ($typenow == 'post') {
+			$output = '<select class="token-filter dropdown_product_cat" name="tokenize">' . self::bak_get_filter_options() . '</select>';
+			echo $output;
+		}
 	}
 
 	public static function bak_post_filter_query($query)
 	{
+
 		if (is_admin()) {
 			if (isset($_GET['tokenize']) && !empty($_GET['tokenize'])) {
 

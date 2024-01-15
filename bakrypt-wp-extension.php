@@ -60,6 +60,6 @@ function bak_wp_cron_deactivate()
 	wp_clear_scheduled_hook('bak_wp_cron_task');
 }
 
-register_activation_hook(WCBAK_PLUGIN_FILE, 'bak_wp_cron_activate');
+register_activation_hook(WPBAK_PLUGIN_FILE, 'bak_wp_cron_activate');
 add_action('bak_wp_cron_task', array("BakExtension\core\Cron", "bak_run_cron_task"), 12);
-register_deactivation_hook(WCBAK_PLUGIN_FILE, 'bak_wp_cron_deactivate');
+register_deactivation_hook(WPBAK_PLUGIN_FILE, 'bak_wp_cron_deactivate');

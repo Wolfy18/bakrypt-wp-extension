@@ -41,29 +41,6 @@ class Post
         $field['name']          = isset($field['name']) ? $field['name'] : $field['id'];
         $field['type']          = isset($field['type']) ? $field['type'] : 'text';
         $field['desc_tip']      = isset($field['desc_tip']) ? $field['desc_tip'] : false;
-        // $data_type              = empty($field['data_type']) ? '' : $field['data_type'];
-
-        // switch ($data_type) {
-        //     case 'price':
-        //         $field['class'] .= ' wc_input_price';
-        //         $field['value']  = wc_format_localized_price($field['value']);
-        //         break;
-        //     case 'decimal':
-        //         $field['class'] .= ' wc_input_decimal';
-        //         $field['value']  = wc_format_localized_decimal($field['value']);
-        //         break;
-        //     case 'stock':
-        //         $field['class'] .= ' wc_input_stock';
-        //         $field['value']  = wc_stock_amount($field['value']);
-        //         break;
-        //     case 'url':
-        //         $field['class'] .= ' wc_input_url';
-        //         $field['value']  = esc_url($field['value']);
-        //         break;
-
-        //     default:
-        //         break;
-        // }
 
         // Custom attribute handling
         $custom_attributes = array();
