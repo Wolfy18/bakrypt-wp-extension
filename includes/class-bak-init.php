@@ -32,7 +32,7 @@ class BakWP
     public static function init()
     {
         //==================================== Settings ===================================
-        add_action('admin_enqueue_scripts', array('BakWP\core\Settings', 'add_extension_register_script'));
+        add_action('enqueue_block_editor_assets', array('BakWP\core\Settings', 'register_scripts'));
         add_action('admin_menu', array('BakWP\core\Settings', 'add_bak_options_page'));
         add_action('admin_init', array('BakWP\core\Settings', 'register_bak_settings'));
 

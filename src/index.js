@@ -7,6 +7,14 @@ import renderLaunchpadModal from './components/launchpadModal';
 import BakryptApiInterface from './api/interfaces';
 import client from './api/client';
 import { injectSpinner, removeSpinner, getData, setData } from './utils';
+import { BakSidebarWithState } from './components/sidebar';
+const { registerPlugin } = wp.plugins;
+
+// register plugins
+registerPlugin('bak-sidebar', {
+	render: BakSidebarWithState,
+	icon: 'database',
+});
 
 const updateRecord = async () => {
 	const id = document.querySelector('#post_id').value;

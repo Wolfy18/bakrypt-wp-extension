@@ -20,25 +20,26 @@ class Settings
 
 	public static $base = 'bak';
 
-	public static function add_extension_register_script($page)
+	public static function register_scripts($page)
 	{
+
 		$script_path = '/build/index.js';
 		$script_asset_path =
 			dirname(WPBAK_PLUGIN_FILE) . '/build/index.asset.php';
 		$script_asset = file_exists($script_asset_path)
 			? require $script_asset_path
-			: ['dependencies' => [], 'version' => filemtime($script_path)];
+			: ['dependencies' => ['wp-blocks', 'wp-editor'], 'version' => filemtime($script_path)];
 		$script_url = plugins_url($script_path, WPBAK_PLUGIN_FILE);
 
 		wp_register_script(
-			'bakrypt-wp-extension',
+			'bak-wp-plugin',
 			$script_url,
 			$script_asset['dependencies'],
 			$script_asset['version'],
 			true
 		);
 
-		wp_localize_script('bakrypt-wp-extension', 'wpApiSettings', [
+		wp_localize_script('bak-wp-plugin', 'wpApiSettings', [
 			'rest' => [
 				'root' => rest_get_url_prefix() . '/bak/v1/',
 				'nonce' => wp_create_nonce('wp_rest'),
@@ -46,15 +47,29 @@ class Settings
 		]);
 
 		wp_register_style(
-			'bakrypt-wp-extension',
+			'bak-wp-plugin',
 			plugins_url('/build/index.css', WPBAK_PLUGIN_FILE),
 			// Add any dependencies styles may have, such as wp-components.
 			[],
 			filemtime(dirname(WPBAK_PLUGIN_FILE) . '/build/index.css')
 		);
 
-		wp_enqueue_script('bakrypt-wp-extension');
-		wp_enqueue_style('bakrypt-wp-extension');
+		// Register sidebar
+		register_block_type(
+			'bakwp/post',
+			array(
+				'title' => 'Blockchain',
+				'script_handles' => ['bak-wp-plugin'],
+				'style_handles'  => ['bak-wp-plugin'],
+				'attributes'    => array(
+					// Define your block attributes
+				),
+				'supports'      => array(
+					// Add support for the sidebar
+					'align' => true,
+				),
+			)
+		);
 
 		if ($page == 'post.php') {
 			// Enqueue WordPress media scripts
