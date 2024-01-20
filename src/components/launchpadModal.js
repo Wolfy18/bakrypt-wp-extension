@@ -36,7 +36,7 @@ const LaunchpadModal = ({ config, getter, callback }) => {
 		<>
 			{showButton && (
 				<>
-					<p style={{ maxWidth: '50%', marginTop: 0 }}>
+					<p>
 						To begin minting your single token, simply click on the
 						button below. If you have previously set a blockchain
 						token image, the system will automatically load it into

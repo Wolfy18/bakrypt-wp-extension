@@ -1,68 +1,172 @@
+import renderLaunchpadModal from './launchpadModal';
 const { withSelect, withDispatch } = wp.data;
 const { PluginSidebar } = wp.editPost;
-const { TextControl, CheckboxControl } = wp.components;
+const { TextControl, TextareaControl, Panel, PanelBody, PanelRow } =
+	wp.components;
 
 const BakSidebar = ({
-	textValue,
-	updateTextValue,
-	checkboxValue,
-	updateCheckboxValue,
+	assetId,
+	policyId,
+	fingerprint,
+	assetName,
+	name,
+	image,
+	amount,
+	metadata,
+	transactionId,
+	status,
 }) => (
 	<PluginSidebar
 		name="bak-sidebar"
 		title="Blockchain Tokenization"
 		icon="database"
 	>
-		<TextControl
-			label="Text Value"
-			value={textValue}
-			onChange={(newValue) => {
-				updateTextValue(newValue);
-				updateBackendSettings({ text_value: newValue });
-			}}
-		/>
-		<CheckboxControl
-			label="Checkbox Value"
-			checked={checkboxValue}
-			onChange={(newValue) => {
-				updateCheckboxValue(newValue);
-				updateBackendSettings({ checkbox_value: newValue });
-			}}
-		/>
+		<Panel>
+			<PanelBody title="Asset information" initialOpen={true}>
+				<PanelRow>
+					<TextControl
+						className="w-full"
+						label="Policy Id"
+						disabled
+						value={policyId}
+					/>{' '}
+				</PanelRow>
+				<PanelRow>
+					<TextControl
+						className="w-full"
+						label="Fingerprint"
+						disabled
+						value={fingerprint}
+					/>
+				</PanelRow>
+				<PanelRow>
+					<TextControl
+						className="w-full"
+						label="Asset Name"
+						disabled
+						value={assetName}
+					/>
+				</PanelRow>
+				<PanelRow>
+					<TextControl
+						className="w-full"
+						label="Name"
+						disabled
+						value={name}
+					/>
+				</PanelRow>
+				<PanelRow>
+					<TextControl
+						className="w-full"
+						label="Image"
+						disabled
+						value={image}
+					/>
+				</PanelRow>
+				<PanelRow>
+					<TextControl
+						className="w-full"
+						label="Number of Tokens"
+						disabled
+						value={amount}
+					/>
+				</PanelRow>
+				<PanelRow>
+					<TextareaControl
+						label="Token Metadata"
+						disabled
+						value={metadata}
+					/>
+				</PanelRow>
+			</PanelBody>
+		</Panel>
+		<Panel>
+			<PanelBody title="Bakrypt Request">
+				<PanelRow>
+					<TextControl
+						className="w-full"
+						label="BAK ID"
+						disabled
+						value={assetId}
+					/>
+				</PanelRow>
+				<PanelRow>
+					<TextControl
+						className="w-full"
+						label="BAK Transaction ID"
+						disabled
+						value={transactionId}
+					/>
+				</PanelRow>
+				<PanelRow>
+					<TextControl
+						className="w-full"
+						label="Status"
+						disabled
+						value={status}
+					/>
+				</PanelRow>
+				<PanelRow>
+					{!assetId
+						? renderLaunchpadModal(
+								{
+									accessToken: 'xxx',
+								},
+								() => '[]',
+								() => {
+									console.log('this is submitter');
+								}
+						  )
+						: 'minted'}
+				</PanelRow>
+			</PanelBody>
+		</Panel>
 	</PluginSidebar>
 );
 
 const BakSidebarWithState = withSelect((select) => {
 	return {
-		textValue:
+		id:
 			select('core/editor').getEditedPostAttribute('meta')
-				.custom_text_value || '',
-		checkboxValue:
+				.bk_token_uuid || '',
+		policyId:
 			select('core/editor').getEditedPostAttribute('meta')
-				.custom_checkbox_value || false,
-		postId: select('core/editor').getCurrentPostId(),
+				.bk_token_policy || '',
+		fingerprint:
+			select('core/editor').getEditedPostAttribute('meta')
+				.bk_token_fingerprint || '',
+		assetName:
+			select('core/editor').getEditedPostAttribute('meta')
+				.bk_token_asset_name || '',
+		name:
+			select('core/editor').getEditedPostAttribute('meta')
+				.bk_token_name || '',
+		image:
+			select('core/editor').getEditedPostAttribute('meta')
+				.bk_token_image || '',
+		amount:
+			select('core/editor').getEditedPostAttribute('meta')
+				.bk_token_amount || '',
+		metadata:
+			select('core/editor').getEditedPostAttribute('meta')
+				.bk_token_json || '',
+		transactionId:
+			select('core/editor').getEditedPostAttribute('meta')
+				.bk_token_transaction || '',
+		status:
+			select('core/editor').getEditedPostAttribute('meta')
+				.bk_token_status || '',
 	};
 })(
-	withDispatch((dispatch) => {
-		return {
-			updateTextValue: (textValue) => {
-				dispatch('core/editor').editPost({
-					meta: { custom_text_value: textValue },
-				});
-			},
-			updateCheckboxValue: (checkboxValue) => {
-				dispatch('core/editor').editPost({
-					meta: { custom_checkbox_value: checkboxValue },
-				});
-			},
-		};
+	withDispatch(() => {
+		return {};
 	})(BakSidebar)
 );
 
 // Function to update backend settings via REST API
 function updateBackendSettings(settings) {
 	const postId = wp.data.select('core/editor').getCurrentPostId();
-	console.log(settings, '<----- settings when updating data ');
+
 	wp.apiFetch({
 		path: `/custom-sidebar/v1/update-settings/`,
 		method: 'POST',
