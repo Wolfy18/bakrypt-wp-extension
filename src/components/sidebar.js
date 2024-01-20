@@ -1,4 +1,6 @@
 import renderLaunchpadModal from './launchpadModal';
+import renderTransactionModal from './transactionModal';
+import BakryptApiInterface from '../api/interfaces';
 const { withSelect, withDispatch } = wp.data;
 const { PluginSidebar } = wp.editPost;
 const { TextControl, TextareaControl, Panel, PanelBody, PanelRow } =
@@ -15,114 +17,132 @@ const BakSidebar = ({
 	metadata,
 	transactionId,
 	status,
-}) => (
-	<PluginSidebar
-		name="bak-sidebar"
-		title="Blockchain Tokenization"
-		icon="database"
-	>
-		<Panel>
-			<PanelBody title="Asset information" initialOpen={true}>
-				<PanelRow>
-					<TextControl
-						className="w-full"
-						label="Policy Id"
-						disabled
-						value={policyId}
-					/>{' '}
-				</PanelRow>
-				<PanelRow>
-					<TextControl
-						className="w-full"
-						label="Fingerprint"
-						disabled
-						value={fingerprint}
-					/>
-				</PanelRow>
-				<PanelRow>
-					<TextControl
-						className="w-full"
-						label="Asset Name"
-						disabled
-						value={assetName}
-					/>
-				</PanelRow>
-				<PanelRow>
-					<TextControl
-						className="w-full"
-						label="Name"
-						disabled
-						value={name}
-					/>
-				</PanelRow>
-				<PanelRow>
-					<TextControl
-						className="w-full"
-						label="Image"
-						disabled
-						value={image}
-					/>
-				</PanelRow>
-				<PanelRow>
-					<TextControl
-						className="w-full"
-						label="Number of Tokens"
-						disabled
-						value={amount}
-					/>
-				</PanelRow>
-				<PanelRow>
-					<TextareaControl
-						label="Token Metadata"
-						disabled
-						value={metadata}
-					/>
-				</PanelRow>
-			</PanelBody>
-		</Panel>
-		<Panel>
-			<PanelBody title="Bakrypt Request">
-				<PanelRow>
-					<TextControl
-						className="w-full"
-						label="BAK ID"
-						disabled
-						value={assetId}
-					/>
-				</PanelRow>
-				<PanelRow>
-					<TextControl
-						className="w-full"
-						label="BAK Transaction ID"
-						disabled
-						value={transactionId}
-					/>
-				</PanelRow>
-				<PanelRow>
-					<TextControl
-						className="w-full"
-						label="Status"
-						disabled
-						value={status}
-					/>
-				</PanelRow>
-				<PanelRow>
-					{!assetId
-						? renderLaunchpadModal(
-								{
-									accessToken: 'xxx',
-								},
-								() => '[]',
-								() => {
-									console.log('this is submitter');
-								}
-						  )
-						: 'minted'}
-				</PanelRow>
-			</PanelBody>
-		</Panel>
-	</PluginSidebar>
-);
+}) => {
+	const bakrypt = new BakryptApiInterface('https://bakrypt.io', 'xxx');
+
+	const viewTransaction = async () => {
+		return await bakrypt.getTransaction(transactionId);
+	};
+
+	return (
+		<PluginSidebar
+			name="bak-sidebar"
+			title="Blockchain Tokenization"
+			icon="database"
+		>
+			<Panel>
+				<PanelBody title="Asset information" initialOpen={true}>
+					<PanelRow>
+						<TextControl
+							className="w-full"
+							label="Policy Id"
+							disabled
+							value={policyId}
+						/>{' '}
+					</PanelRow>
+					<PanelRow>
+						<TextControl
+							className="w-full"
+							label="Fingerprint"
+							disabled
+							value={fingerprint}
+						/>
+					</PanelRow>
+					<PanelRow>
+						<TextControl
+							className="w-full"
+							label="Asset Name"
+							disabled
+							value={assetName}
+						/>
+					</PanelRow>
+					<PanelRow>
+						<TextControl
+							className="w-full"
+							label="Name"
+							disabled
+							value={name}
+						/>
+					</PanelRow>
+					<PanelRow>
+						<TextControl
+							className="w-full"
+							label="Image"
+							disabled
+							value={image}
+						/>
+					</PanelRow>
+					<PanelRow>
+						<TextControl
+							className="w-full"
+							label="Number of Tokens"
+							disabled
+							value={amount}
+						/>
+					</PanelRow>
+					<PanelRow>
+						<TextareaControl
+							label="Token Metadata"
+							disabled
+							value={metadata}
+						/>
+					</PanelRow>
+				</PanelBody>
+			</Panel>
+			<Panel>
+				<PanelBody title="Bakrypt Request">
+					<PanelRow>
+						<TextControl
+							className="w-full"
+							label="BAK ID"
+							disabled
+							value={assetId}
+						/>
+					</PanelRow>
+					<PanelRow>
+						<TextControl
+							className="w-full"
+							label="BAK Transaction ID"
+							disabled
+							value={transactionId}
+						/>
+					</PanelRow>
+					<PanelRow>
+						<TextControl
+							className="w-full"
+							label="Status"
+							disabled
+							value={status}
+						/>
+					</PanelRow>
+					<PanelRow>
+						{!transactionId
+							? renderLaunchpadModal(
+									{
+										accessToken: 'xxx',
+									},
+									() => undefined,
+
+									() => {
+										console.log(
+											'Update the post information over here'
+										);
+									}
+							  )
+							: renderTransactionModal(
+									{
+										accessToken: 'xxx',
+									},
+									viewTransaction,
+
+									[]
+							  )}
+					</PanelRow>
+				</PanelBody>
+			</Panel>
+		</PluginSidebar>
+	);
+};
 
 const BakSidebarWithState = withSelect((select) => {
 	return {
