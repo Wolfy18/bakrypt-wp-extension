@@ -29,6 +29,107 @@ class Post
         // self::$adapter = new RestAdapter();    
     }
 
+    public static function register_bak_post_meta()
+    {
+        register_post_meta(
+            'post', // Post type
+            'bk_token_uuid', // Meta key
+            array(
+                'show_in_rest' => true,
+                'single'       => true,
+                'type'         => 'string',
+            )
+        );
+
+        register_post_meta(
+            'post', // Post type
+            'bk_token_policy', // Meta key
+            array(
+                'show_in_rest' => true,
+                'single'       => true,
+                'type'         => 'string',
+            )
+        );
+
+        register_post_meta(
+            'post', // Post type
+            'bk_token_fingerprint', // Meta key
+            array(
+                'show_in_rest' => true,
+                'single'       => true,
+                'type'         => 'string',
+            )
+        );
+
+        register_post_meta(
+            'post', // Post type
+            'bk_token_asset_name', // Meta key
+            array(
+                'show_in_rest' => true,
+                'single'       => true,
+                'type'         => 'string',
+            )
+        );
+        register_post_meta(
+            'post', // Post type
+            'bk_token_name', // Meta key
+            array(
+                'show_in_rest' => true,
+                'single'       => true,
+                'type'         => 'string',
+            )
+        );
+
+        register_post_meta(
+            'post', // Post type
+            'bk_token_image', // Meta key
+            array(
+                'show_in_rest' => true,
+                'single'       => true,
+                'type'         => 'string',
+            )
+        );
+        register_post_meta(
+            'post', // Post type
+            'bk_token_amount', // Meta key
+            array(
+                'show_in_rest' => true,
+                'single'       => true,
+                'type'         => 'string',
+            )
+        );
+
+        register_post_meta(
+            'post', // Post type
+            'bk_token_json', // Meta key
+            array(
+                'show_in_rest' => true,
+                'single'       => true,
+                'type'         => 'string',
+            )
+        );
+
+        register_post_meta(
+            'post', // Post type
+            'bk_token_transaction', // Meta key
+            array(
+                'show_in_rest' => true,
+                'single'       => true,
+                'type'         => 'string',
+            )
+        );
+
+        register_post_meta(
+            'post', // Post type
+            'bk_token_status', // Meta key
+            array(
+                'show_in_rest' => true,
+                'single'       => true,
+                'type'         => 'string',
+            )
+        );
+    }
+
     public static function bak_text_input($field)
     {
         global $post;

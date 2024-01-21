@@ -48,6 +48,7 @@ class BakWP
         add_filter('parse_query', array("BakWP\controllers\PostList", 'bak_post_filter_query'));
 
         // //==================================== Post  ===================================
+        add_action('init', array('BakWP\controllers\Post', 'register_bak_post_meta'));
         // add_filter('woocommerce_product_tabs', array("BakWP\controllers\Post", 'bakrypt_blockchain_post_tab'));
         // add_filter('woocommerce_product_data_tabs', array("BakWP\controllers\Post", 'bakrypt_blockchain_post_data_tab'));
         // add_action('woocommerce_product_data_panels', array("BakWP\controllers\Post", 'bakrypt_blockchain_post_data_fields'));

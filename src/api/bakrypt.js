@@ -4,7 +4,7 @@ import {
 	uploadAttachment,
 } from './helpers';
 
-class BakryptApiInterface {
+class Bakrypt {
 	constructor(uri, token) {
 		this.token = token;
 		this.uri = uri;
@@ -12,7 +12,7 @@ class BakryptApiInterface {
 
 	getTransaction(id) {
 		return retrieveTransaction({
-			id: id,
+			id,
 			uri: this.uri,
 			token: this.token,
 		});
@@ -20,7 +20,7 @@ class BakryptApiInterface {
 
 	getAsset(id) {
 		return retrieveAsset({
-			id: id,
+			id,
 			uri: this.uri,
 			token: this.token,
 		});
@@ -28,11 +28,11 @@ class BakryptApiInterface {
 
 	postAttachment(file) {
 		return uploadAttachment({
-			file: file,
+			file,
 			uri: this.uri,
 			token: this.token,
 		});
 	}
 }
 
-export default BakryptApiInterface;
+export default Bakrypt;

@@ -1,6 +1,6 @@
 import renderLaunchpadModal from './launchpadModal';
 import renderTransactionModal from './transactionModal';
-import BakryptApiInterface from '../api/interfaces';
+import Bakrypt from '../api/bakrypt';
 const { withSelect, withDispatch } = wp.data;
 const { PluginSidebar } = wp.editPost;
 const { TextControl, TextareaControl, Panel, PanelBody, PanelRow } =
@@ -18,7 +18,7 @@ const BakSidebar = ({
 	transactionId,
 	status,
 }) => {
-	const bakrypt = new BakryptApiInterface('https://bakrypt.io', 'xxx');
+	const bakrypt = new Bakrypt('https://bakrypt.io', 'xxx');
 
 	const viewTransaction = async () => {
 		return await bakrypt.getTransaction(transactionId);
@@ -146,7 +146,7 @@ const BakSidebar = ({
 
 const BakSidebarWithState = withSelect((select) => {
 	return {
-		id:
+		assetId:
 			select('core/editor').getEditedPostAttribute('meta')
 				.bk_token_uuid || '',
 		policyId:
