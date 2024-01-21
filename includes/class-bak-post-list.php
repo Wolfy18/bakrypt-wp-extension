@@ -25,7 +25,12 @@ class PostList
 
 	public static function bak_fingerprint_column($columns)
 	{
-		$columns['asset_fingerprint'] = __('Token');
+		global $post_type;
+
+		// Check if the current post type is "post"
+		if ($post_type === 'post') {
+			$columns['asset_fingerprint'] = __('Token');
+		}
 
 		return $columns;
 	}
