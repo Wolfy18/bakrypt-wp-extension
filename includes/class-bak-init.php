@@ -32,7 +32,7 @@ class BakWP
     public static function init()
     {
         //==================================== Settings ===================================
-        add_action('admin_enqueue_scripts', array('BakWP\core\Settings', 'add_extension_register_script'));
+        add_action('enqueue_block_editor_assets', array('BakWP\core\Settings', 'register_scripts'));
         add_action('admin_menu', array('BakWP\core\Settings', 'add_bak_options_page'));
         add_action('admin_init', array('BakWP\core\Settings', 'register_bak_settings'));
 
@@ -48,6 +48,7 @@ class BakWP
         add_filter('parse_query', array("BakWP\controllers\PostList", 'bak_post_filter_query'));
 
         // //==================================== Post  ===================================
+        add_action('init', array('BakWP\controllers\Post', 'register_bak_post_meta'));
         // add_filter('woocommerce_product_tabs', array("BakWP\controllers\Post", 'bakrypt_blockchain_post_tab'));
         // add_filter('woocommerce_product_data_tabs', array("BakWP\controllers\Post", 'bakrypt_blockchain_post_data_tab'));
         // add_action('woocommerce_product_data_panels', array("BakWP\controllers\Post", 'bakrypt_blockchain_post_data_fields'));

@@ -4,9 +4,17 @@ import { createRoot } from 'react-dom';
 import Swal from 'sweetalert2';
 import renderTransactionModal from './components/transactionModal';
 import renderLaunchpadModal from './components/launchpadModal';
-import BakryptApiInterface from './api/interfaces';
+import Bakrypt from './api/bakrypt';
 import client from './api/client';
 import { injectSpinner, removeSpinner, getData, setData } from './utils';
+import { BakSidebarWithState } from './components/sidebar';
+const { registerPlugin } = wp.plugins;
+
+// register plugins
+registerPlugin('bak-sidebar', {
+	render: BakSidebarWithState,
+	icon: 'database',
+});
 
 const updateRecord = async () => {
 	const id = document.querySelector('#post_id').value;
@@ -422,7 +430,7 @@ const init = async () => {
 		mintModalContainer.appendChild(modal);
 	}
 
-	const helper = new BakryptApiInterface(
+	const helper = new Bakrypt(
 		testnet ? `https://testnet.bakrypt.io` : `https://bakrypt.io`,
 		accessToken
 	);
