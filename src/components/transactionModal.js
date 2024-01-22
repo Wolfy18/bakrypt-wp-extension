@@ -50,7 +50,7 @@ const TransactionModal = ({ config, getter, collection }) => {
 	return (
 		<>
 			{showButton && (
-				<Button variant="secondary" onClick={openModal}>
+				<Button variant="primary" onClick={openModal}>
 					View Request
 				</Button>
 			)}

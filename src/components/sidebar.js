@@ -1,9 +1,10 @@
 import renderLaunchpadModal from './launchpadModal';
 import renderTransactionModal from './transactionModal';
 import Bakrypt from '../api/bakrypt';
+import { useEffect, useState } from 'react';
 const { withSelect, withDispatch } = wp.data;
 const { PluginSidebar } = wp.editPost;
-const { TextControl, TextareaControl, Panel, PanelBody, PanelRow } =
+const { TextControl, TextareaControl, Panel, PanelBody, PanelRow, Button } =
 	wp.components;
 
 const BakSidebar = ({
@@ -18,11 +19,33 @@ const BakSidebar = ({
 	transactionId,
 	status,
 }) => {
-	const bakrypt = new Bakrypt('https://bakrypt.io', 'xxx');
+	const [bakrypt, setBakrypt] = useState(undefined);
+	const [accessToken, setAccessToken] = useState(undefined);
+	const [testnet, setTestnet] = useState(false);
 
 	const viewTransaction = async () => {
+		if (!bakrypt) return;
 		return await bakrypt.getTransaction(transactionId);
 	};
+
+	useEffect(() => {
+		(async () => {
+			const response = await wp.apiFetch({
+				path: `/bak/v1/auth/token`,
+				method: 'POST',
+			});
+			setBakrypt(
+				new Bakrypt(
+					!!response.testnet
+						? 'https://testnet.bakrypt.io'
+						: 'https://bakrypt.io',
+					response.data.access_token
+				)
+			);
+			setTestnet(response.testnet);
+			setAccessToken(response.data.accessToken);
+		})();
+	}, []);
 
 	return (
 		<PluginSidebar
@@ -119,7 +142,8 @@ const BakSidebar = ({
 						{!transactionId
 							? renderLaunchpadModal(
 									{
-										accessToken: 'xxx',
+										accessToken,
+										testnet,
 									},
 									() => undefined,
 
@@ -131,12 +155,17 @@ const BakSidebar = ({
 							  )
 							: renderTransactionModal(
 									{
-										accessToken: 'xxx',
+										accessToken,
+										testnet,
 									},
 									viewTransaction,
 
 									[]
 							  )}
+
+						{transactionId && (
+							<Button variant="secondary">Sync Token</Button>
+						)}
 					</PanelRow>
 				</PanelBody>
 			</Panel>
