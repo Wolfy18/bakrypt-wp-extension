@@ -46,7 +46,7 @@ const TransactionModal = ({ config, getter, collection }) => {
 				.querySelector('.components-modal__content')
 				.appendChild(invoice);
 		})();
-	}, [isOpen, showNotice, collection, getter]);
+	}, [isOpen, showNotice, collection, getter, accessToken, testnet]);
 	return (
 		<>
 			{showButton && (

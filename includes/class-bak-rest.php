@@ -429,7 +429,7 @@ class RestAdapter
         return $serializer;
     }
 
-    public static function fetch_access_token($request)
+    public static function fetch_access_token()
     {
         $self = new self();
 
