@@ -61,5 +61,5 @@ function bak_wp_cron_deactivate()
 }
 
 register_activation_hook(WPBAK_PLUGIN_FILE, 'bak_wp_cron_activate');
-add_action('bak_wp_cron_task', array("BakExtension\core\Cron", "bak_run_cron_task"), 12);
+add_action('bak_wp_cron_task', array("BakWP\core\Cron", "bak_run_cron_task"), 12);
 register_deactivation_hook(WPBAK_PLUGIN_FILE, 'bak_wp_cron_deactivate');
