@@ -660,20 +660,21 @@ class Post
         // grab the post
         $post = get_post($post_id);
 
-        // save the custom SKU using WooCommerce built-in functions
-        if ($bk_token_uuid) $post->update_meta_data('bk_token_uuid', $bk_token_uuid);
-        if ($bk_token_policy) $post->update_meta_data('bk_token_policy', $bk_token_policy);
-        if ($bk_token_fingerprint) $post->update_meta_data('bk_token_fingerprint', $bk_token_fingerprint);
-        if ($bk_token_asset_name) $post->update_meta_data('bk_token_asset_name', $bk_token_asset_name);
-        if ($bk_token_name) $post->update_meta_data('bk_token_name', $bk_token_name);
-        if ($bk_token_image) $post->update_meta_data('bk_token_image', $bk_token_image);
-        if ($bk_token_amount) $post->update_meta_data('bk_token_amount', $bk_token_amount);
-        if ($bk_token_status) $post->update_meta_data('bk_token_status', $bk_token_status);
-        if ($bk_token_transaction) $post->update_meta_data('bk_token_transaction', $bk_token_transaction);
-        if ($bk_token_json) $post->update_meta_data('bk_token_json', $bk_token_json);
-        if ($bk_att_token_image) $post->update_meta_data('bk_att_token_image', $bk_att_token_image);
+        // update metadata 
+        if ($bk_token_uuid) update_post_meta($post_id, 'bk_token_uuid', $bk_token_uuid);
+        if ($bk_token_policy) update_post_meta($post_id, 'bk_token_policy', $bk_token_policy);
+        if ($bk_token_fingerprint) update_post_meta($post_id, 'bk_token_fingerprint', $bk_token_fingerprint);
+        if ($bk_token_asset_name) update_post_meta($post_id, 'bk_token_asset_name', $bk_token_asset_name);
+        if ($bk_token_name) update_post_meta($post_id, 'bk_token_name', $bk_token_name);
+        if ($bk_token_image) update_post_meta($post_id, 'bk_token_image', $bk_token_image);
+        if ($bk_token_amount) update_post_meta($post_id, 'bk_token_amount', $bk_token_amount);
+        if ($bk_token_status) update_post_meta($post_id, 'bk_token_status', $bk_token_status);
+        if ($bk_token_transaction) update_post_meta($post_id, 'bk_token_transaction', $bk_token_transaction);
+        if ($bk_token_json) update_post_meta($post_id, 'bk_token_json', $bk_token_json);
+        if ($bk_att_token_image) update_post_meta($post_id, 'bk_att_token_image', $bk_att_token_image);
 
-        $post->save();
+        // $post->save();
+        wp_update_post($post);
 
         return $post;
     }
@@ -707,21 +708,21 @@ class Post
     public static function get_post_data($post_id)
     {
         // grab the post
-        $post = get_post($post_id);
+        // $post = get_post($post_id);
 
         // Create structure
         $post_data = array(
-            "uuid" => $post->get_meta('bk_token_uuid'),
-            "policy" => $post->get_meta('bk_token_policy'),
-            "fingerprint" => $post->get_meta('bk_token_fingerprint'),
-            "asset_name" => $post->get_meta('bk_token_asset_name'),
-            "name" => $post->get_meta('bk_token_name'),
-            "image" => $post->get_meta('bk_token_image'),
-            "amount" => $post->get_meta('bk_token_amount'),
-            "status" => $post->get_meta('bk_token_status'),
-            "transaction" => $post->get_meta('bk_token_transaction'),
-            "json" => $post->get_meta('bk_token_json'),
-            "att_image" => $post->get_meta('bk_att_token_image')
+            "uuid" => get_post_meta($post_id, 'bk_token_uuid'),
+            "policy" => get_post_meta($post_id, 'bk_token_policy'),
+            "fingerprint" => get_post_meta($post_id, 'bk_token_fingerprint'),
+            "asset_name" => get_post_meta($post_id, 'bk_token_asset_name'),
+            "name" => get_post_meta($post_id, 'bk_token_name'),
+            "image" => get_post_meta($post_id, 'bk_token_image'),
+            "amount" => get_post_meta($post_id, 'bk_token_amount'),
+            "status" => get_post_meta($post_id, 'bk_token_status'),
+            "transaction" => get_post_meta($post_id, 'bk_token_transaction'),
+            "json" => get_post_meta($post_id, 'bk_token_json'),
+            "att_image" => get_post_meta($post_id, 'bk_att_token_image')
         );
 
         return $post_data;

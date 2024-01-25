@@ -46,11 +46,11 @@ const TransactionModal = ({ config, getter, collection }) => {
 				.querySelector('.components-modal__content')
 				.appendChild(invoice);
 		})();
-	}, [isOpen, showNotice, collection, getter]);
+	}, [isOpen, showNotice, collection, getter, accessToken, testnet]);
 	return (
 		<>
 			{showButton && (
-				<Button variant="secondary" onClick={openModal}>
+				<Button variant="primary" onClick={openModal}>
 					View Request
 				</Button>
 			)}

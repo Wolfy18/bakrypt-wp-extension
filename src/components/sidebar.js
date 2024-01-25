@@ -1,10 +1,18 @@
 import renderLaunchpadModal from './launchpadModal';
 import renderTransactionModal from './transactionModal';
 import Bakrypt from '../api/bakrypt';
+import { useEffect, useState } from 'react';
 const { withSelect, withDispatch } = wp.data;
 const { PluginSidebar } = wp.editPost;
-const { TextControl, TextareaControl, Panel, PanelBody, PanelRow } =
-	wp.components;
+const {
+	TextControl,
+	TextareaControl,
+	Panel,
+	PanelBody,
+	PanelRow,
+	Button,
+	Notice,
+} = wp.components;
 
 const BakSidebar = ({
 	assetId,
@@ -18,11 +26,79 @@ const BakSidebar = ({
 	transactionId,
 	status,
 }) => {
-	const bakrypt = new Bakrypt('https://bakrypt.io', 'xxx');
+	const [bakrypt, setBakrypt] = useState(undefined);
+	const [accessToken, setAccessToken] = useState(undefined);
+	const [testnet, setTestnet] = useState(false);
+	const [alertState, setAlertState] = useState({
+		type: undefined,
+		message: '',
+		show: false,
+	});
 
 	const viewTransaction = async () => {
+		if (!bakrypt) return;
 		return await bakrypt.getTransaction(transactionId);
 	};
+
+	// Function to update backend settings via REST API
+	const updatePost = (data) => {
+		const postId = wp.data.select('core/editor').getCurrentPostId();
+
+		wp.apiFetch({
+			path: `/bak/v1/posts/${postId}`,
+			method: 'PUT',
+			data,
+		})
+			.then(() => {
+				setAlertState({
+					show: true,
+					type: 'success',
+					message: 'Post has been updated',
+				});
+			})
+			.catch(() => {
+				setAlertState({
+					show: true,
+					type: 'error',
+					message: 'Unable to update post',
+				});
+			});
+	};
+
+	const updateAsset = async () => {
+		if (!bakrypt) return;
+		const asset = await bakrypt.getAsset(assetId);
+		if (asset)
+			updatePost({
+				bk_token_uuid: asset.uuid,
+				bk_token_policy: asset.policy_id,
+				bk_token_fingerprint: asset.fingerprint,
+				bk_token_asset_name: asset.asset_name,
+				bk_token_image: asset.image,
+				bk_token_name: asset.name,
+				bk_token_amount: asset.amount,
+				bk_token_status: asset.status,
+			});
+	};
+
+	useEffect(() => {
+		(async () => {
+			const response = await wp.apiFetch({
+				path: `/bak/v1/auth/token`,
+				method: 'POST',
+			});
+			setBakrypt(
+				new Bakrypt(
+					!!response.testnet
+						? 'https://testnet.bakrypt.io'
+						: 'https://bakrypt.io',
+					response.data.access_token
+				)
+			);
+			setTestnet(response.testnet);
+			setAccessToken(response.data.accessToken);
+		})();
+	}, []);
 
 	return (
 		<PluginSidebar
@@ -119,7 +195,8 @@ const BakSidebar = ({
 						{!transactionId
 							? renderLaunchpadModal(
 									{
-										accessToken: 'xxx',
+										accessToken,
+										testnet,
 									},
 									() => undefined,
 
@@ -131,12 +208,23 @@ const BakSidebar = ({
 							  )
 							: renderTransactionModal(
 									{
-										accessToken: 'xxx',
+										accessToken,
+										testnet,
 									},
 									viewTransaction,
 
 									[]
 							  )}
+						{transactionId && (
+							<Button variant="secondary" onClick={updateAsset}>
+								Sync Token
+							</Button>
+						)}
+						{alertState.show && (
+							<Notice status={alertState.type}>
+								{alertState.message}
+							</Notice>
+						)}
 					</PanelRow>
 				</PanelBody>
 			</Panel>
@@ -183,24 +271,4 @@ const BakSidebarWithState = withSelect((select) => {
 	})(BakSidebar)
 );
 
-// Function to update backend settings via REST API
-function updateBackendSettings(settings) {
-	const postId = wp.data.select('core/editor').getCurrentPostId();
-
-	wp.apiFetch({
-		path: `/custom-sidebar/v1/update-settings/`,
-		method: 'POST',
-		data: {
-			post_id: postId,
-			...settings,
-		},
-	})
-		.then((response) => {
-			console.log(response);
-		})
-		.catch((error) => {
-			console.error(error);
-		});
-}
-
-export { BakSidebarWithState, updateBackendSettings };
+export { BakSidebarWithState };
