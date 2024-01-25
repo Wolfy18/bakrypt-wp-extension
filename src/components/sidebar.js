@@ -27,8 +27,10 @@ const BakSidebar = ({
 	status,
 }) => {
 	const [bakrypt, setBakrypt] = useState(undefined);
-	const [accessToken, setAccessToken] = useState(undefined);
-	const [testnet, setTestnet] = useState(false);
+	const [config, setConfig] = useState({
+		testnet: undefined,
+		accessToken: undefined,
+	});
 	const [alertState, setAlertState] = useState({
 		type: undefined,
 		message: '',
@@ -95,8 +97,10 @@ const BakSidebar = ({
 					response.data.access_token
 				)
 			);
-			setTestnet(response.testnet);
-			setAccessToken(response.data.accessToken);
+			setConfig({
+				testnet: response.testnet,
+				accessToken: response.data.access_token,
+			});
 		})();
 	}, []);
 
@@ -195,8 +199,8 @@ const BakSidebar = ({
 						{!transactionId
 							? renderLaunchpadModal(
 									{
-										accessToken,
-										testnet,
+										accessToken: config.accessToken,
+										testnet: config.testnet,
 									},
 									() => undefined,
 
@@ -208,8 +212,8 @@ const BakSidebar = ({
 							  )
 							: renderTransactionModal(
 									{
-										accessToken,
-										testnet,
+										accessToken: config.accessToken,
+										testnet: config.testnet,
 									},
 									viewTransaction,
 
