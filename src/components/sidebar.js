@@ -66,11 +66,22 @@ const BakSidebar = ({
 				});
 			});
 	};
-
+	const deleteAsset = async () => {
+		const postId = wp.data.select('core/editor').getCurrentPostId();
+		await wp.apiFetch({
+			path: `/bak/v1/posts/${postId}`,
+			method: 'DELETE',
+		});
+		setAlertState({
+			show: true,
+			type: 'info',
+			message: 'Blockchain information has been dropped',
+		});
+	};
 	const updateAsset = async () => {
 		if (!bakrypt) return;
 		const asset = await bakrypt.getAsset(assetId);
-		if (asset)
+		if (asset) {
 			updatePost({
 				bk_token_uuid: asset.uuid,
 				bk_token_policy: asset.policy_id,
@@ -81,6 +92,7 @@ const BakSidebar = ({
 				bk_token_amount: asset.amount,
 				bk_token_status: asset.status,
 			});
+		}
 	};
 
 	useEffect(() => {
@@ -204,10 +216,30 @@ const BakSidebar = ({
 									},
 									() => undefined,
 
-									() => {
-										console.log(
-											'Update the post information over here'
-										);
+									(detail) => {
+										const { collection, transaction } =
+											detail;
+
+										const asset = collection[0];
+
+										updatePost({
+											bk_token_uuid: asset.uuid,
+											bk_token_policy:
+												transaction.policy_id,
+											bk_token_fingerprint:
+												asset.fingerprint,
+											bk_token_asset_name:
+												asset.asset_name,
+											bk_token_image: asset.image,
+											bk_token_name: asset.name,
+											bk_token_amount: asset.amount,
+											bk_token_status: transaction.status,
+											bk_token_json: JSON.stringify(
+												transaction.metadata
+											),
+											bk_token_transaction:
+												transaction.uuid,
+										});
 									}
 							  )
 							: renderTransactionModal(
@@ -224,6 +256,17 @@ const BakSidebar = ({
 								Sync Token
 							</Button>
 						)}
+					</PanelRow>
+					<PanelRow>
+						<Button
+							variant="secondary"
+							isDestructive={true}
+							onClick={deleteAsset}
+						>
+							Clear
+						</Button>
+					</PanelRow>
+					<PanelRow>
 						{alertState.show && (
 							<Notice status={alertState.type}>
 								{alertState.message}
